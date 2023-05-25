@@ -105,7 +105,7 @@ import dj_database_url
 
 DATABASES = {
 
-    'default': dj_database_url.parse('postgres://producationdatabase_user:PGaV4KZZ8asvSOrf8B9oWjZBCmaXz2JG@dpg-chnj6qu4dad1d53b0tt0-a.singapore-postgres.render.com/producationdatabase')
+    'default': dj_database_url.parse('postgres://productiondatabase_9vr8_user:v6k2BfUOG0VdAdD11sNJ34QlH4vNPsKQ@dpg-chnjiau4dad1d53fasc0-a.singapore-postgres.render.com/productiondatabase_9vr8')
 }
 
 AUTH_USER_MODEL = 'app.User'
