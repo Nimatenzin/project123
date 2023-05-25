@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hn54@fom4c65(&iw%let5c0f%px&$y=@5_+!ez#+zw$a@#o*_2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -87,18 +87,25 @@ WSGI_APPLICATION = 'aquablue.wsgi.application'
 # }
 
 
-from decouple import config
+# from decouple import config
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER':  config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+
+
+#     }
+# }
+
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER':  config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
 
-
-    }
+    'default': dj_database_url.parse('postgres://producationdatabase_user:PGaV4KZZ8asvSOrf8B9oWjZBCmaXz2JG@dpg-chnj6qu4dad1d53b0tt0-a.singapore-postgres.render.com/producationdatabase')
 }
 
 AUTH_USER_MODEL = 'app.User'
