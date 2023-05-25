@@ -1,0 +1,68 @@
+
+  {% extends 'base.html' %} 
+
+  {% load static %}
+  
+  {% block content %}
+  <br><br><br><br><br>
+  <div class="container">
+  <div class="row justify-content-center mt-5">
+	<div class="col-md-6">
+	  <div class="card">
+		<div class="card-header bg-dark text-white text-center">
+		  <h4>Create a New Account</h4>
+		</div>
+		<div class="card-body">
+			<form action="/registerUser/" method="post">
+			{% csrf_token %} 
+			<div class="form-wrapper">
+				<input type="text" placeholder="Username" name="username" class="form-control" required>
+				<i class="zmdi zmdi-account"></i>
+			</div>
+			<div class="form-wrapper">
+				<input type="email" placeholder="Email Address" name="email" class="form-control" required>
+				<i class="zmdi zmdi-email"></i>
+			</div>
+			<div class="form-wrapper">
+				<input type="tel" placeholder="Phone Number" name="phone_number" class="form-control" pattern="([1]{1}[7]{1}[0-9]{6}|[7]{1}[7]{1}[0-9]{6})" max-length='8' required>
+				<i class="zmdi zmdi-phone"></i>
+			</div>
+			<div class="form-wrapper">
+				<input type="password" placeholder="Password" name="password" class="form-control" required>
+				<i class="zmdi zmdi-lock"></i>
+			</div>
+			<div class="form-wrapper">
+				<input type="password" placeholder="Confirm Password" name="confirm_password" class="form-control" required>
+				<i class="zmdi zmdi-lock"></i>
+			</div>
+			<ul class="errorlist">
+				{% for field in form %}
+					{% if field.errors %}
+						{% for error in field.errors %}
+							<li style="color: red;">{{error}}</li>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+				<li style="color: red;">{{form.non_field_errors}}</li>
+			</ul> 
+			<div class="form-group row">
+			  <div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary" id="son" style="background-color: #5995fd;">Signup</button>
+			  </div>
+			</div>
+			<div class="text-center mt-4">
+			  <p style="color:#333; font-weight:300px;">Already have an account? <a href="{% url 'login' %}" style="color:#5995fd;">Login</a></p>
+			</div>
+			
+		  </form>
+		</div>
+	  </div>
+	  <!-- Load message -->		
+	  {% include 'alerts.html' %}
+	</div>
+  </div>
+  </div>
+  <br><br><br>
+  {% endblock %}
+  
+  

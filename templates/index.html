@@ -1,0 +1,342 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+{% include 'alerts.html' %}
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+  <div
+    class="container position-relative text-center text-lg-start"
+    data-aos="zoom-in"
+    data-aos-delay="100"
+  >
+    <div class="row">
+      <div class="col-lg-8">
+        <h1>Welcome to <span style="color: #3b71ca">Aqua Blue</span></h1>
+        <br />
+        <h2>
+          Looking to make a splash? Book your pool session online now! It's
+          quick and easy - just a few clicks and you're ready to swim. Don't
+          miss out on your chance to make a splash, book your pool session
+          today!
+        </h2>
+
+        <div class="btns">
+          <a href="#book-a-table" class="btn-book animated fadeInUp">Book</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div
+          class="col-lg-6 order-1 order-lg-2"
+          data-aos="zoom-in"
+          data-aos-delay="100"
+        >
+          <div class="about-img" >
+            <img src="{% static 'assets/img/swim.jpeg' %}" alt="" />
+          </div>
+        </div>
+        <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content">
+          <h3>Rules and Regulations for Aqua Blue Swimming Pool</h3>
+          <br />
+          <ul class="bullet">
+            <li>
+              <i class="bi bi-check-circle"></i> No food or drinks allowed in
+              the swimming pool area
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i>Slippers and footwear must be
+              removed outside the pool gate
+            </li>
+            <li>
+              <i class="bi bi-check-circle"></i> Only those with a reserved time
+              slot are permitted to use swimming pool
+            </li>
+          </ul>
+          <p class="rule">
+            We would like to remind visitors that the use of the swimming pool
+            is at their own risk. Aqua Blue is not liable for any injuries or
+            accidents that may occur while using the swimming pool area. We ask
+            that all visitors take care to follow the rules and regulations and
+            use the swimming pool area responsibly and with caution. We hope
+            that all visitors have a pleasant and safe experience at Aqua Blue's
+            swimming pool.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End About Section -->
+
+  <!-- ======= Why Us Section ======= -->
+  <section id="why-us" class="why-us">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2 style="color: white">Why Us</h2>
+        <p>Why Choose Aqua Blue?</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="box" data-aos="zoom-in" data-aos-delay="100">
+            <span>01</span>
+            <h4>Luxurious Swimming Pool Experience</h4>
+            <p>
+              Experience the ultimate in relaxation and luxury at Aqua Blue. Our
+              private swimming pool offers a serene environment with stunning
+              views and beautiful landscaping. Take in the beauty of the water
+              and enjoy uninterrupted relaxation. Whether you're looking for a
+              romantic escape or a peaceful day in the sun, Aqua Blue is the
+              perfect choice.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+          <div class="box" data-aos="zoom-in" data-aos-delay="200">
+            <span>02</span>
+            <h4>Hassle-Free Online Booking System</h4>
+            <p>
+              At Aqua Blue, we make booking your private swimming pool
+              experience quick and easy with our hassle-free online booking
+              system. With just a few clicks, you can choose your preferred time
+              slot and confirm your reservation. Our convenient online booking
+              process ensures that you can spend less time planning and more
+              time enjoying your day at the pool.
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 mt-4 mt-lg-0">
+          <div class="box" data-aos="zoom-in" data-aos-delay="300">
+            <span>03</span>
+            <h4>Safe and Clean Swimming-Pool</h4>
+            <p>
+              The safety and cleanliness of our swimming pool is our top
+              priority at Aqua Blue. We regularly maintain and clean our pool to
+              ensure a safe and hygienic environment for all visitors. Our
+              state-of-the-art filtration system keeps the water clean and
+              clear. We also have established rules and regulations for the
+              swimming pool area for everyone.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Why Us Section -->
+
+  <!-- ======= Menu Section ======= -->
+  <!-- End Menu Section -->
+
+  <!-- ======= Specials Section ======= -->
+  <!-- End Specials Section -->
+
+  <!-- ======= Events Section ======= -->
+  <!-- End Events Section -->
+
+  <!-- ======= Gallery Section ======= -->
+  <section id="gallery" class="gallery">
+    <div class="container" data-aos="fade-up">
+        <div id="section-title" class="section-title">
+            <h2>Gallery</h2>
+            <p>Some photos from Aqua Blue</p>
+        </div>
+
+        <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper-wrapper">
+                {% for image in images %}
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <a href="{{ image.image.url }}" class="gallery-lightbox" data-gall="gallery-item">
+                                <img src="{{ image.image.url }}" alt="" class="img-fluid" />
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</section>
+
+  <!-- End Testimonials Section -->
+
+  <!-- End Gallery Section -->
+
+  <!-- ======= Book A Table Section ======= -->
+  {% include 'check_availability.html' %}
+  <!-- End Book A Table Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials section-bg">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Customer Testimonals</h2>
+        <p>What they're saying about us</p>
+      </div>
+
+      <div
+        class="testimonials-slider swiper-container"
+        data-aos="fade-up"
+        data-aos-delay="100"
+      >
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                I had an amazing experience at Aqua Blue swimming pool! The
+                online booking system was quick and easy to use, and the staff
+                was friendly and helpful. The pool itself was clean and private,
+                and the beautiful landscaping and stunning views made for a
+                truly luxurious experience. I highly recommend Aqua Blue to
+                anyone looking for a relaxing and enjoyable day by the water.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img
+                src="{% static 'assets/img/testimonials/norbu.jpg' %}"
+                class="testimonial-img"
+                alt=""
+              />
+              <h3>Norbu Wangcuk</h3>
+              <h4>Gcit student</h4>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Aqua Blue is the perfect destination for a private and luxurious
+                swimming pool experience. The online booking system was
+                convenient and hassle-free, and the staff was attentive and
+                professional. The pool was sparkling clean and surrounded by
+                beautiful scenery, making it the perfect place to relax and
+                unwind. I would definitely recommend Aqua Blue.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img
+                src="{% static 'assets/img/testimonials/tshewang.jpg' %}"
+                class="testimonial-img"
+                alt=""
+              />
+              <h3>Tshewang Dhendup</h3>
+              <h4>Gcit Student</h4>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                I had an amazing time at Aqua Blue swimming pool. The online
+                booking system made it easy to reserve a private pool
+                experience, and the staff was friendly and accommodating. The
+                pool was clean and well-maintained, and the surrounding
+                landscaping was beautiful. I can't wait to come back to Aqua
+                Blue for another relaxing and enjoyable day by the water.
+
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img
+                src="{% static 'assets/img/testimonials/chopel.jpg' %}"
+                class="testimonial-img"
+                alt=""
+              />
+              <h3>Sonam Chophel</h3>
+              <h4>Gcit Student</h4>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                Aqua Blue is the ultimate destination for a private and serene
+                swimming pool experience. The online booking system was
+                user-friendly and efficient, and the staff was helpful and
+                attentive. The pool itself was clean and inviting, and the
+                surrounding scenery was breathtaking. I highly recommend Aqua
+                Blue to anyone looking for a luxurious and peaceful day by the
+                water.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img
+                src="{% static 'assets/img/testimonials/gishing.jpg' %}"
+                class="testimonial-img"
+                alt=""
+              />
+              <h3>Dhendup Ghishing</h3>
+              <h4>Gcit Student</h4>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <p>
+                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                I had an unforgettable experience at Aqua Blue swimming pool.
+                The online booking system was easy to use, and the staff was
+                welcoming and accommodating. The pool was clean and beautiful,
+                and the surrounding landscaping made for a truly luxurious
+                experience. I would definitely recommend Aqua Blue to anyone
+                looking for swimming pool getaway.
+                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+              </p>
+              <img
+                src="{% static 'assets/img/testimonials/tshering.jpg' %}"
+                class="testimonial-img"
+                alt=""
+              />
+              <h3>Tshering</h3>
+              <h4>Gcit Student</h4>
+            </div>
+          </div>
+          <!-- End testimonial item -->
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+  <!-- End Testimonials Section -->
+
+  <!-- ======= Chefs Section ======= -->
+
+  <!-- End Chefs Section -->
+
+  <!-- ======= Contact Section ======= -->
+  
+<section id="contact" class="contact">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Contact</h2>
+      <p>Contact Us</p>
+    </div>
+  </div>
+
+  <div data-aos="fade-up">
+    <iframe
+      style="border: 0; width: 100%; height: 350px"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1156.3703349175419!2d91.19298323054144!3d27.272955746521973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x375ea9a27eea2edf%3A0x7a6bacdc0cb49d1b!2sKathok%20pema%20yodling!5e1!3m2!1sen!2sbt!4v1680169890510!5m2!1sen!2sbt"
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+
+</section>
+
+  <!-- End Contact Section -->
+</main>
+<!-- End #main -->
+{% endblock %}
+

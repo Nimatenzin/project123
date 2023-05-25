@@ -1,0 +1,90 @@
+/* Reset box sizing */
+* {
+	box-sizing: border-box;
+  }
+  
+  /* Set global font family and size */
+  body {
+	font-family: Arial, sans-serif;
+	font-size: 16px;
+  }
+  
+  /* Define a class for container with some padding and a max-width */
+ 
+  /* Add some margin to form groups and labels */
+  .form-group {
+	margin-bottom: 20px;
+  }
+  
+  label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+  }
+  
+  /* Use a CSS variable for border color to avoid repetition */
+  input[type="number"],
+  input[type="text"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid var(--border-color, #ccc);
+	border-radius: 4px;
+	font-size: inherit; /* inherit font size from parent */
+  }
+  
+  /* Use the :focus-within pseudo-class to highlight the form group when any child input element receives focus */
+  .form-group:focus-within {
+	--border-color: #0077b5; /* use a blue border when focused */
+  }
+  
+  /* Add some margin to the button and make it more prominent */
+  button[type="submit"] {
+	display: block;
+	margin: 20px auto 0;
+	padding: 10px 20px;
+	background-color: #0077b5;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: inherit; /* inherit font size from parent */
+	transition: background-color 0.2s ease-in-out;
+  }
+  
+  button[type="submit"]:hover {
+	background-color: #005f8b;
+  }
+  
+  button[type="submit"]:active {
+	background-color: #004d73;
+  }
+  
+  /* Use a grid layout for the form fields */
+  form {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+  }
+  
+  /* Style the total amount input as a readonly field */
+  input[name="total_amount"] {
+	background-color: #f5f5f5;
+	font-weight: bold;
+  }
+  
+  /* Use a CSS variable for error message color to avoid repetition */
+  .error {
+	color: var(--error-color, red);
+  }
+  
+  /* Use media queries to adjust the layout for smaller screens */
+  @media screen and (max-width: 480px) {
+	form {
+	  grid-template-columns: 1fr;
+	}
+  
+	button[type="submit"] {
+	  margin-top: 40px;
+	}
+  }
+  

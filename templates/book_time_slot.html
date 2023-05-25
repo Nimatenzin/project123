@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br><br><br><br><br>
+
+<div class="container" style="max-width: 600px;">
+	<h1>Book Time Slot</h1>
+
+	{% if not time_slot %}
+	<p>Time slot not found.</p>
+	{% else %}
+	<p>Time slot: {{ time_slot.start_time|date:'l, F j, Y' }} from {{ time_slot.start_time|time:'h:i A' }} to {{ time_slot.end_time|time:'h:i A' }}</p>
+	<p>Available adult slots: {{ time_slot.available_adults_slots }}</p>
+	<p>Available child slots: {{ time_slot.available_child_slots }}</p>
+	<br>
+	<form method="post">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="num_adults">Number of adults:</label>
+			<input type="number" class="form-control" id="num_adults" name="num_adults" min="0" max="{{ time_slot.available_adults_slots }}" onchange="updateAmount()">
+		</div>
+		<div class="form-group">
+			<label for="num_children">Number of children:</label>
+			<input type="number" class="form-control" id="num_children" name="num_children" min="0" max="{{ time_slot.available_child_slots }}" onchange="updateAmount()">
+		</div>
+		<div class="form-group">
+			<label for="total_amount">Total amount:</label>
+			<input type="text" class="form-control" id="total_amount" name="total_amount" readonly>
+		</div>
+		<button type="submit" class="btn btn-primary">Book</button>
+		{% if error_message %}
+			<p>{{ error_message }}</p>
+		{% endif %}
+	</form>
+
+	{% endif %}
+
+	
+
+</div>
+{% include 'alerts.html' %}
+
+<script>
+	function updateAmount() {
+		var numAdults = parseInt(document.getElementById("num_adults").value);
+		var numChildren = parseInt(document.getElementById("num_children").value);
+		var priceAdult = 150;
+		var priceChild = 50;
+		var totalAmount = (numAdults * priceAdult) + (numChildren * priceChild);
+		document.getElementById("total_amount").value = "Nu." + totalAmount;
+	}
+</script>
+<br><br><br><br>
+
+{% endblock %}

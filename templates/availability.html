@@ -1,0 +1,241 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Aqua Blue</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css"
+      integrity="sha512-W3ZfgmZ5g1rCPFiCbOb+tn7g7sQWOQCB1AkDqrBG1Yp3iDjY9KYFh/k1AWxrt85LX5BRazEAuv+5DV2YZwghag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/swim.png' %}" rel="icon" />
+    <link
+      href="{% static 'assets/img/apple-touch-icon.png' %}"
+      rel="apple-touch-icon"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="{% static 'assets/vendor/animate.css/animate.min.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/custome.css'%} " rel="stylesheet" />
+    <link href="{% static 'assets/css/nima.css' %}" rel="stylesheet" />
+	<link href="{% static 'assets/css/file.css' %}" rel="stylesheet">
+	<link href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!-- =======================================================
+  * Template Name: Restaurantly - v3.1.0
+  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  </head>
+
+  <body>
+    <!-- ======= Top Bar ======= -->
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+      <div
+        class="container d-flex justify-content-center justify-content-md-between"
+      >
+        <div class="contact-info d-flex align-items-center">
+          <i class="bi bi-phone d-flex align-items-center"
+            ><span>+975 17797835</span></i
+          >
+          <i class="bi bi-clock d-flex align-items-center ms-4"
+            ><span> Mon-Sat: 9AM - 6PM</span></i
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top d-flex align-items-cente">
+      <div
+        class="container-fluid container-xl d-flex align-items-center justify-content-lg-between"
+      >
+        <h1 class="logo me-auto me-lg-0">
+          <a href="/">Aqua Blue</a>
+        </h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+          <ul>
+            <li>
+              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">HOME</a>
+            </li>
+            <li>
+              <a class="nav-link{% if request.path == '/about/' %} active{% endif %}" href="/about/">ABOUT US</a>
+            </li>
+            <li><a class="nav-link scrollto" href="/#gallery">GALLERY</a></li>
+            <li>
+              <a class="nav-link scrollto" href="/#book-a-table">RESERVATION</a>
+            </li>
+            <li>
+              <a class="nav-link scrollto" href="/#contact">CONTACT US</a>
+            </li>
+            {% if user.is_authenticated %}
+          <li><a href="/logout/" class="nav-link scrollto text-danger">Logout</a></li>
+          <li><a href="/myAccount/" class="nav-link scrollto">MY Account</a></li>
+          {% else %}
+          <li><a href="/login/" class="nav-link scrollto">Sign In</a></li>
+          <li><a href="/registerUser/" class="nav-link scrollto">Sign Up</a></li>
+          {% endif %}
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+	<br><br><br>
+	
+	<main>
+
+	<section>
+
+    <h2 class="hd">Available Time Slots</h2>
+	{% if time_slots %}
+		<table>
+			<thead>
+				<tr>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Total Adults Slots</th>
+					<th>Total Child Slots</th>
+					<th>Available Adults Slots</th>
+					<th>Available Child Slots</th>
+					<th>Booked Adults Slots</th>
+					<th>Booked Child Slots</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for time_slot in time_slots %}
+					<tr class= "tr">
+						<td>{{ time_slot.start_time }}</td>
+						<td>{{ time_slot.end_time }}</td>
+						<td>{{ time_slot.total_adults_slots }}</td>
+						<td>{{ time_slot.total_child_slots }}</td>
+						<td>{{ time_slot.available_adults_slots }}</td>
+						<td>{{ time_slot.available_child_slots }}</td>
+						<td>{{ time_slot.booked_adults_slots }}</td>
+						<td>{{ time_slot.booked_child_slots }}</td>
+						<td>
+							<form method="post" action="{% url 'book_time_slot' time_slot.id %}">
+								{% csrf_token %}
+								<button type="submit">Book</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+			{% include 'alerts.html' %}
+		</table>
+	{% else %}
+		<p>No available time slots for the selected date.</p>
+	{% endif %}
+
+	</section>
+</main>
+	
+<br><br><br>
+    <!-- ======= Footer ======= -->
+
+    <footer id="footer">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright
+          <strong><span style="color: #3b71ca">Aqua Blue</span></strong
+          >. All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+          Designed by <a href="#" style="color: #3b71ca">AQUA BLUE TEAM</a>
+        </div>
+      </div>
+    </footer>
+
+    <div id="preloader"></div>
+    <a
+      href="#"
+      class="back-to-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Vendor JS Files -->
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#time-slots-table').DataTable();
+		});
+	</script>
+
+    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script>
+      function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    </script>
+
+    <script src="{% static 'assets/js/main.js' %}"></script>
+  </body>
+</html>
+

@@ -1,0 +1,135 @@
+/* Table styles */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #000000;
+}
+
+th {
+  background-color: #000000;
+}
+
+tr:nth-child(even) {
+  background-color: #000000;
+}
+
+tr.pending {
+  background-color: #309068; /* light blue */
+}
+
+tr.cancelled {
+  background-color: #c11f1f; /* light red */
+}
+
+tr.approved {
+  background-color: #183bbc; /* light green */
+}
+
+tr.pending td:nth-child(9) {
+  color: blue;
+}
+
+tr.cancelled td:nth-child(9) {
+  color: red;
+}
+
+tr.approved td:nth-child(9) {
+  color: green;
+}
+
+/* Message styles */
+.messages {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.messages li {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.messages li.error {
+  background-color: #f2dede;
+  color: #a94442;
+  border-color: #ebccd1;
+}
+
+.messages li.success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-color: #d6e9c6;
+}
+
+/* Action link styles */
+.action-links a {
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.action-links a.approve {
+  background-color: #4CAF50; /* green */
+}
+
+.action-links a.cancel {
+  background-color: #f44336; /* red */
+}
+
+/* Form styles */
+.form {
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.form input[type="text"], .form input[type="email"], .form input[type="tel"], .form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.form input[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.form label {
+  font-weight: bold;
+}
+
+.form .error {
+  color: red;
+  margin-bottom: 10px;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 600px) {
+  table {
+    font-size: 12px;
+  }
+
+  .form input[type="text"], .form input[type="email"], .form input[type="tel"], .form textarea {
+    font-size: 14px;
+  }
+}
+body {
+  background-color: black;
+}
