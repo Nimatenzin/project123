@@ -1,0 +1,96 @@
+/* Style the main section */
+.main-section {
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+/* Style the user account nav list */
+.user-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.user-nav-list li {
+  margin-bottom: 10px;
+}
+
+.user-nav-list li a {
+  color: #333;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.user-nav-list li.active a {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Style the user dashboard */
+.user-dashboard {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* Style the order headings */
+.order-heading-titles {
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.order-heading-titles div {
+  flex-basis: calc(100% / 6);
+  text-align: center;
+}
+
+.order-heading-titles div:first-child {
+  flex-basis: 50%;
+  text-align: left;
+}
+
+/* Style the order status */
+.order-status {
+  border-radius: 3px;
+  color: #fff;
+  display: inline-block;
+  padding: 5px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.order-status.completed {
+  background-color: #047a06;
+}
+
+.order-status.processing {
+  background-color: #1e73be;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+  /* Make the user dashboard columns stack on smaller screens */
+  .order-heading-titles div {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  
+  /* Adjust padding on user dashboard */
+  .user-dashboard {
+    padding: 10px;
+  }
+  
+  /* Make the user nav list display vertically on smaller screens */
+  .user-nav-list li {
+    margin-bottom: 5px;
+  }
+  
+  .user-nav-list li a {
+    padding: 5px;
+  }
+}

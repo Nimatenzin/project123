@@ -1,0 +1,63 @@
+/* Define styles for the table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  thead th {
+    text-align: left;
+    background-color: #f2f2f2;
+    padding: 10px;
+    font-weight: bold;
+  }
+  
+  tbody td {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  tbody td:first-child {
+    font-weight: bold;
+  }
+  
+  /* Define styles for the booking forms */
+  form {
+    display: inline-block;
+    margin: 0;
+  }
+  
+  input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    margin-right: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #3e8e41;
+  }
+  
+  /* Define styles for the page title */
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Define styles for error messages */
+  .error-message {
+    color: #f00;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  
