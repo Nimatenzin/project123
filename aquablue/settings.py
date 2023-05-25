@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary_storage
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-hn54@fom4c65(&iw%let5c0f%px&$y=@5_+!ez#+zw$a@#o*_2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -41,6 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app',
     'customer',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -197,4 +200,10 @@ EMAIL_HOST_PASSWORD = 'itseksjvfalwonxk'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Aqua Blue swimming pool <lungtendubjur74@gmail.com>'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dsruvfqot',
+    'API_KEY': '455293822431671',
+    'API_SECRET': '7P6RW_OYkMqqoLS5RS-hqCM5sT0',
 
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
