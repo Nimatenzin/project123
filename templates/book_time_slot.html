@@ -17,15 +17,15 @@
 	<form method="post">
 		{% csrf_token %}
 		<div class="form-group">
-			<label for="num_adults">Number of adults:</label>
+			<label for="num_adults" style:"color:white;">Number of adults:</label>
 			<input type="number" class="form-control" id="num_adults" name="num_adults" min="0" max="{{ time_slot.available_adults_slots }}" onchange="updateAmount()">
 		</div>
 		<div class="form-group">
-			<label for="num_children">Number of children:</label>
+			<label for="num_children"style:"color:white;">Number of children:</label>
 			<input type="number" class="form-control" id="num_children" name="num_children" min="0" max="{{ time_slot.available_child_slots }}" onchange="updateAmount()">
 		</div>
 		<div class="form-group">
-			<label for="total_amount">Total amount:</label>
+			<label for="total_amount" style:"color:white;">Total amount:</label>
 			<input type="text" class="form-control" id="total_amount" name="total_amount" readonly>
 		</div>
 		<button type="submit" class="btn btn-primary">Book</button>

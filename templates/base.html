@@ -105,17 +105,17 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">HOME</a>
+              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
             </li>
             <li>
-              <a class="nav-link{% if request.path == '/about/' %} active{% endif %}" href="/about/">ABOUT US</a>
+              <a class="nav-link{% if request.path == '/about/' %} active{% endif %}" href="/about/">About us</a>
             </li>
-            <li><a class="nav-link scrollto" href="/#gallery">GALLERY</a></li>
+            <li><a class="nav-link scrollto" href="/#gallery">Gallery</a></li>
             <li>
-              <a class="nav-link scrollto" href="/#book-a-table">RESERVATION</a>
+              <a class="nav-link scrollto" href="/#book-a-table">Reservation</a>
             </li>
             <li>
-              <a class="nav-link{% if request.path == '/contact/' %} active{% endif %}" href="/contact/">CONTACT US</a>
+              <a class="nav-link{% if request.path == '/contact/' %} active{% endif %}" href="/contact/">Contact us</a>
             </li>
           {% if user.is_authenticated %}
           <li class="nav-item dropdown">
