@@ -254,7 +254,7 @@ def payment(request):
             payment.user = request.user
             payment.save()
             messages.success(request, 'Payment submitted successfully.')
-            return redirect('index.html')
+            return redirect('index')
         else:
             messages.error(request, 'Payment submission failed. Please check the form and try again.')
     else:
@@ -361,7 +361,7 @@ def contact(request):
         contact = Contact(name=name, occupation=occupation, message=message)
         contact.save()
         messages.success(request, 'Your message has been sent!')
-        return redirect('index.html')
+        return redirect('index')
     return render(request, 'contact.html')
 
 
