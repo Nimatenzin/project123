@@ -16,27 +16,27 @@
 			<form action="/registerUser/" method="post">
 				{% csrf_token %} 
 				<div class="form-wrapper">
-					<label for="username">Username</label>
+					<label for="username" style="color: black;">Username</label>
 					<input type="text" id="username" name="username" class="form-control" required>
 					<i class="zmdi zmdi-account"></i>
 				</div>
 				<div class="form-wrapper">
-					<label for="email">Email Address</label>
+					<label for="email" style="color: black;">Email Address</label>
 					<input type="email" id="email" name="email" class="form-control" required>
 					<i class="zmdi zmdi-email"></i>
 				</div>
 				<div class="form-wrapper">
-					<label for="phone_number">Phone Number</label>
+					<label for="phone_number" style="color: black;">Phone Number</label>
 					<input type="tel" id="phone_number" name="phone_number" class="form-control" pattern="([1]{1}[7]{1}[0-9]{6}|[7]{1}[7]{1}[0-9]{6})" maxlength="8" required>
 					<i class="zmdi zmdi-phone"></i>
 				</div>
 				<div class="form-wrapper">
-					<label for="password">Password</label>
+					<label for="password" style="color: black;">Password</label>
 					<input type="password" id="password" name="password" class="form-control" required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
 				<div class="form-wrapper">
-					<label for="confirm_password">Confirm Password</label>
+					<label for="confirm_password" style="color: black;">Confirm Password</label>
 					<input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
@@ -58,7 +58,7 @@
 				<div class="text-center mt-4">
 					<p style="color:#333; font-weight:300px;">Already have an account? <a href="{% url 'login' %}" style="color:#5995fd;">Login</a></p>
 				</div>
-			</form>					
+			</form>						
 		</div>
 	  </div>
 	  <!-- Load message -->		
