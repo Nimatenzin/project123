@@ -16,23 +16,28 @@
 			<form action="/registerUser/" method="post">
 				{% csrf_token %} 
 				<div class="form-wrapper">
-					<input type="text" placeholder="Username" name="username" class="form-control" required>
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username" class="form-control" required>
 					<i class="zmdi zmdi-account"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="email" placeholder="Email Address" name="email" class="form-control" required>
+					<label for="email">Email Address</label>
+					<input type="email" id="email" name="email" class="form-control" required>
 					<i class="zmdi zmdi-email"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="tel" placeholder="Phone Number" name="phone_number" class="form-control" pattern="([1]{1}[7]{1}[0-9]{6}|[7]{1}[7]{1}[0-9]{6})" maxlength="8" required>
+					<label for="phone_number">Phone Number</label>
+					<input type="tel" id="phone_number" name="phone_number" class="form-control" pattern="([1]{1}[7]{1}[0-9]{6}|[7]{1}[7]{1}[0-9]{6})" maxlength="8" required>
 					<i class="zmdi zmdi-phone"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="password" placeholder="Password" name="password" class="form-control" required>
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password" class="form-control" required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="password" placeholder="Confirm Password" name="confirm_password" class="form-control" required>
+					<label for="confirm_password">Confirm Password</label>
+					<input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
 				<ul class="errorlist">
@@ -53,7 +58,7 @@
 				<div class="text-center mt-4">
 					<p style="color:#333; font-weight:300px;">Already have an account? <a href="{% url 'login' %}" style="color:#5995fd;">Login</a></p>
 				</div>
-			</form>			
+			</form>					
 		</div>
 	  </div>
 	  <!-- Load message -->		
