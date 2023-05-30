@@ -144,21 +144,13 @@ class PaymentApproval(models.Model):
     payment = models.OneToOneField(Payment, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
-    approved_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
-    approved_at = models.DateTimeField(null=True)
-    cancelled_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, related_name='canceller')
-    cancelled_at = models.DateTimeField(null=True)
-
+   
     def approve(self, user):
         self.approved = True
-        self.approved_by = user
-        self.approved_at = timezone.now()
         self.save()
 
     def cancel(self, user):
         self.cancelled = True
-        self.cancelled_by = user
-        self.cancelled_at = timezone.now()
         self.save()
 
     def __str__(self):

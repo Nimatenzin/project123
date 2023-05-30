@@ -289,9 +289,12 @@ def custDashboard(request):
     }
     return render(request, 'custDashboard.html', context)
 
+from django.contrib.auth.models import User
+
 @login_required
 def payment_approval(request):
-    payments = Payment.objects.all()
+    user = request.user
+    payments = Payment.objects.filter(user=user)
     approvals = PaymentApproval.objects.filter(payment__in=payments)
 
     context = {
@@ -309,8 +312,11 @@ def approve_payment(request, payment_id):
     if request.user.is_staff:
         try:
             approval = PaymentApproval.objects.get(payment=payment)
-            approval.approve(request.user)
-            messages.success(request, f'Payment {payment_id} has been approved.')
+            if not approval.approved and not approval.cancelled:  # Check if already approved or cancelled
+                approval.approve(request.user)
+                messages.success(request, f'Payment {payment_id} has been approved.')
+            else:
+                messages.warning(request, f'Payment {payment_id} has already been approved or cancelled.')
         except PaymentApproval.DoesNotExist:
             messages.error(request, f'Payment {payment_id} has not been submitted for approval.')
     else:
@@ -326,14 +332,18 @@ def cancel_payment(request, payment_id):
     if request.user.is_staff:
         try:
             approval = PaymentApproval.objects.get(payment=payment)
-            approval.cancel(request.user)
-            messages.success(request, f'Payment {payment_id} has been cancelled.')
+            if not approval.approved and not approval.cancelled:  # Check if already approved or cancelled
+                approval.cancel(request.user)
+                messages.success(request, f'Payment {payment_id} has been cancelled.')
+            else:
+                messages.warning(request, f'Payment {payment_id} has already been approved or cancelled.')
         except PaymentApproval.DoesNotExist:
             messages.error(request, f'Payment {payment_id} has not been submitted for approval.')
     else:
         messages.error(request, 'You do not have permission to cancel payments.')
 
     return redirect('payment-approval')
+
 
 from django.shortcuts import render
 from .models import Image
