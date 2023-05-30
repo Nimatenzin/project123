@@ -289,12 +289,18 @@ def custDashboard(request):
     }
     return render(request, 'custDashboard.html', context)
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .models import Payment, PaymentApproval
+from .models import User
 
 @login_required
 def payment_approval(request):
-    user = request.user
-    payments = Payment.objects.filter(user=user)
+    email = request.user.email
+    User = get_object_or_404(User, email=email)
+    payments = Payment.objects.filter(email=email)
     approvals = PaymentApproval.objects.filter(payment__in=payments)
 
     context = {
@@ -306,19 +312,22 @@ def payment_approval(request):
 
 
 @login_required
-def approve_payment(request, payment_id):
-    payment = Payment.objects.get(id=payment_id)
+def approve_payment(request, email):
+    user = get_object_or_404(User, email=email)
 
     if request.user.is_staff:
         try:
-            approval = PaymentApproval.objects.get(payment=payment)
+            payment = get_object_or_404(Payment, user=user)
+            approval = get_object_or_404(PaymentApproval, payment=payment)
             if not approval.approved and not approval.cancelled:  # Check if already approved or cancelled
                 approval.approve(request.user)
-                messages.success(request, f'Payment {payment_id} has been approved.')
+                messages.success(request, f'Payment for {email} has been approved.')
             else:
-                messages.warning(request, f'Payment {payment_id} has already been approved or cancelled.')
+                messages.warning(request, f'Payment for {email} has already been approved or cancelled.')
+        except Payment.DoesNotExist:
+            messages.error(request, f'No payment found for {email}.')
         except PaymentApproval.DoesNotExist:
-            messages.error(request, f'Payment {payment_id} has not been submitted for approval.')
+            messages.error(request, f'Payment for {email} has not been submitted for approval.')
     else:
         messages.error(request, 'You do not have permission to approve payments.')
 
@@ -326,19 +335,22 @@ def approve_payment(request, payment_id):
 
 
 @login_required
-def cancel_payment(request, payment_id):
-    payment = Payment.objects.get(id=payment_id)
+def cancel_payment(request, email):
+    user = get_object_or_404(User, email=email)
 
     if request.user.is_staff:
         try:
-            approval = PaymentApproval.objects.get(payment=payment)
+            payment = get_object_or_404(Payment, user=user)
+            approval = get_object_or_404(PaymentApproval, payment=payment)
             if not approval.approved and not approval.cancelled:  # Check if already approved or cancelled
                 approval.cancel(request.user)
-                messages.success(request, f'Payment {payment_id} has been cancelled.')
+                messages.success(request, f'Payment for {email} has been cancelled.')
             else:
-                messages.warning(request, f'Payment {payment_id} has already been approved or cancelled.')
+                messages.warning(request, f'Payment for {email} has already been approved or cancelled.')
+        except Payment.DoesNotExist:
+            messages.error(request, f'No payment found for {email}.')
         except PaymentApproval.DoesNotExist:
-            messages.error(request, f'Payment {payment_id} has not been submitted for approval.')
+            messages.error(request, f'Payment for {email} has not been submitted for approval.')
     else:
         messages.error(request, 'You do not have permission to cancel payments.')
 

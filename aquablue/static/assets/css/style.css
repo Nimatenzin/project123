@@ -232,9 +232,6 @@ h6 {
   transition: 0.3s;
 }
 
-a#accountDropdown {
-  width: 30px;
-}
 
 .dropdown-menu a.dropdown-item:hover {
   background-color: #5995fd;
