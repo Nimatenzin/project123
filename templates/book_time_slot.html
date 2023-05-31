@@ -1,75 +1,82 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} 
 {% block content %}
-
-<br><br><br><br><br>
-
-<div class="container" style="max-width: 600px;">
-	<h1>Book Time Slot</h1>
-
-	{% if not time_slot %}
-	<p>Time slot not found.</p>
-	{% else %}
-	<p>Time slot: {{ time_slot.start_time|date:'l, F j, Y' }} from {{ time_slot.start_time|time:'h:i A' }} to {{ time_slot.end_time|time:'h:i A' }}</p>
-	<p>Available adult slots: {{ time_slot.available_adults_slots }}</p>
-	<p>Available child slots: {{ time_slot.available_child_slots }}</p>
-	<br>
-	<form method="post">
-		{% csrf_token %}
-		<div class="form-group">
-			<label for="num_adults" style:"color:white;">Number of adults:</label>
-			<input type="number" class="form-control" id="num_adults" name="num_adults" min="0" max="{{ time_slot.available_adults_slots }}" onchange="updateAmount()">
-		</div>
-		<div class="form-group">
-			<label for="num_children" style:"color:white;">Number of children:</label>
-			<input type="number" class="form-control" id="num_children" name="num_children" min="0" max="{{ time_slot.available_child_slots }}" onchange="updateAmount()">
-		</div>
-		<div class="form-group">
-			<label for="total_amount" style:"color:white;">Total amount:</label>
-			<input type="text" class="form-control" id="total_amount" name="total_amount" readonly>
-		</div>
-		<button type="submit" class="btn btn-primary">Book</button>
-		{% if error_message %}
-			<p>{{ error_message }}</p>
-		{% endif %}
-	</form>
-
-	{% endif %}
-
-	
-
+<br /><br /><br /><br /><br /><br /><br /><br />
+<div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="card">
+          <div class="card-body" style="background-color:black;">
+            <header class="header">
+              <h1 id="title" class="text-light" style="padding-bottom:5px;">Booking Details</h1>
+            </header>
+            {% if not time_slot %}
+              <p>Time slot not found.</p>
+            {% else %}
+              <p>Time slot: {{ time_slot.start_time|date:'l, F j, Y' }} from {{ time_slot.start_time|time:'h:i A' }} to {{ time_slot.end_time|time:'h:i A' }}</p>
+              <p>Available adult slots: {{ time_slot.available_adults_slots }}</p>
+              <p>Available child slots: {{ time_slot.available_child_slots }}</p>
+              <br>
+              <form id="survey-form" method="post">
+				{% csrf_token %}
+                <div class="form-group">
+                  <label id="number-label" for="num_adults" class="text-light">Total Adults <small>(Required)</small></label>
+                  <input type="number" class="form-control" id="num_adults" name="num_adults" min="0" max="{{ time_slot.available_adults_slots }}" onchange="updateAmount()">
+                </div>
+                <div class="form-group">
+                  <label id="number-label" for="num_children" class="text-light">Total Children <small>(Required)</small></label>
+                  <input type="number" class="form-control" id="num_children" name="num_children" min="0" max="{{ time_slot.available_child_slots }}" onchange="updateAmount()">
+                </div>
+                <div class="form-group">
+                  <label id="name-label" for="name" class="text-light">Total Amount</label>
+                  <input type="text" class="form-control" id="total_amount" name="total_amount" readonly>
+                </div>
+                <br>
+                <div class="text-center">
+                  <button type="submit" id="submit" class="btn btn-block" style="background-color:#5995fd ; border-radius: 500px; padding: 15px;">
+                    Book
+                  </button>
+                  {% if error_message %}
+                    <p>{{ error_message }}</p>
+                  {% endif %}
+                </div>
+                <br>
+              </form>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% include 'alerts.html' %}
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 <script>
-	function updateAmount() {
-	  var numAdultsInput = document.getElementById("num_adults");
-	  var numChildrenInput = document.getElementById("num_children");
-	  var totalAmountInput = document.getElementById("total_amount");
-	  
-	  // Check if the input fields exist
-	  if (numAdultsInput && numChildrenInput && totalAmountInput) {
-		var numAdults = parseInt(numAdultsInput.value);
-		var numChildren = parseInt(numChildrenInput.value);
+  function updateAmount() {
+    var numAdultsInput = document.getElementById("num_adults");
+    var numChildrenInput = document.getElementById("num_children");
+    var totalAmountInput = document.getElementById("total_amount");
   
-		// Check if the entered values are valid numbers
-		if (!isNaN(numAdults) && !isNaN(numChildren)) {
-		  var priceAdult = 150;
-		  var priceChild = 50;
-		  var totalAmount = (numAdults * priceAdult) + (numChildren * priceChild);
-  
-		  // Check if the calculated total amount is a valid number
-		  if (!isNaN(totalAmount)) {
-			totalAmountInput.value = "Nu." + totalAmount;
-		  } else {
-			totalAmountInput.value = "Invalid Amount";
-		  }
-		} else {
-		  totalAmountInput.value = "Both the Fields must be filled";
-		}
-	  }
-	}
-  </script>
-  
-<br><br><br><br>
+    // Check if the input fields exist
+    if (numAdultsInput && numChildrenInput && totalAmountInput) {
+      var numAdults = parseInt(numAdultsInput.value);
+      var numChildren = parseInt(numChildrenInput.value);
 
+      // Check if the entered values are valid numbers
+      if (!isNaN(numAdults) && !isNaN(numChildren)) {
+        var priceAdult = 150;
+        var priceChild = 50;
+        var totalAmount = (numAdults * priceAdult) + (numChildren * priceChild);
+
+        // Check if the calculated total amount is a valid number
+        if (!isNaN(totalAmount)) {
+          totalAmountInput.value = "Nu." + totalAmount;
+        } else {
+          totalAmountInput.value = "Invalid Amount";
+        }
+      } else {
+        totalAmountInput.value = "Both fields must be filled";
+      }
+    }
+  }
+</script>
 {% endblock %}
