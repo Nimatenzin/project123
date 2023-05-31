@@ -34,7 +34,7 @@ class PaymentApprovalInline(admin.TabularInline):
     model = PaymentApproval
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'account_number', 'total_amount', 'journal_number', 'email', 'phone_number', 'screenshot', 'created_at')
+    list_display = ('id', 'account_number','email', 'phone_number', 'screenshot', 'created_at')
     inlines = [PaymentApprovalInline]
 
     def journal_number(self, obj):

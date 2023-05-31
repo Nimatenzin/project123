@@ -43,7 +43,7 @@ from .models import Payment
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Payment
-        fields = ['account_number', 'total_amount', 'journal_number', 'screenshot', 'email', 'phone_number']
+        fields = ['account_number','screenshot', 'email', 'phone_number']
         widgets = {
             'email': forms.EmailInput(attrs={'readonly': 'readonly'}),
             'phone_number': forms.TextInput(attrs={'readonly': 'readonly'}),

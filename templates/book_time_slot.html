@@ -40,17 +40,36 @@
 
 </div>
 {% include 'alerts.html' %}
-
 <script>
 	function updateAmount() {
-		var numAdults = parseInt(document.getElementById("num_adults").value);
-		var numChildren = parseInt(document.getElementById("num_children").value);
-		var priceAdult = 150;
-		var priceChild = 50;
-		var totalAmount = (numAdults * priceAdult) + (numChildren * priceChild);
-		document.getElementById("total_amount").value = "Nu." + totalAmount;
+	  var numAdultsInput = document.getElementById("num_adults");
+	  var numChildrenInput = document.getElementById("num_children");
+	  var totalAmountInput = document.getElementById("total_amount");
+	  
+	  // Check if the input fields exist
+	  if (numAdultsInput && numChildrenInput && totalAmountInput) {
+		var numAdults = parseInt(numAdultsInput.value);
+		var numChildren = parseInt(numChildrenInput.value);
+  
+		// Check if the entered values are valid numbers
+		if (!isNaN(numAdults) && !isNaN(numChildren)) {
+		  var priceAdult = 150;
+		  var priceChild = 50;
+		  var totalAmount = (numAdults * priceAdult) + (numChildren * priceChild);
+  
+		  // Check if the calculated total amount is a valid number
+		  if (!isNaN(totalAmount)) {
+			totalAmountInput.value = "Nu." + totalAmount;
+		  } else {
+			totalAmountInput.value = "Invalid Amount";
+		  }
+		} else {
+		  totalAmountInput.value = "Both the Fields must be filled";
+		}
+	  }
 	}
-</script>
+  </script>
+  
 <br><br><br><br>
 
 {% endblock %}

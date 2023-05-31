@@ -224,6 +224,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Schedule
+from django.shortcuts import redirect
 
 @login_required(login_url='login/')
 def show_available_time_slots(request):
@@ -235,10 +236,9 @@ def show_available_time_slots(request):
             return render(request, 'availability.html', {'time_slots': time_slots})
         else:
             messages.error(request, 'No schedule found for the selected date.')
+            return redirect('/#book-a-table')
     else:
         return redirect('login')
-    return render(request, 'index.html')
-
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -269,25 +269,6 @@ def payment_success(request):
     return render(request, 'payment_success.html')
 
 
-# views.py
-
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import Payment, PaymentApproval
-
-
-@login_required(login_url='login')
-@user_passes_test(check_role_customer)
-def custDashboard(request):
-    payments = Payment.objects.all()
-    approvals = PaymentApproval.objects.filter(payment__in=payments)
-
-    context = {
-        'payments': payments,
-        'approvals': approvals,
-    }
-    return render(request, 'custDashboard.html', context)
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -298,9 +279,8 @@ from .models import User
 
 @login_required
 def payment_approval(request):
-    email = request.user.email
-    User = get_object_or_404(User, email=email)
-    payments = Payment.objects.filter(email=email)
+    user = request.user
+    payments = Payment.objects.filter(user=user)
     approvals = PaymentApproval.objects.filter(payment__in=payments)
 
     context = {
@@ -309,6 +289,7 @@ def payment_approval(request):
     }
 
     return render(request, 'payment_approval.html', context)
+
 
 
 @login_required
@@ -366,10 +347,6 @@ def index(request):
     return render(request, 'index.html', context)
 
 
-
-
-
-
 from django.shortcuts import render, redirect
 from app.models import Contact
 
@@ -385,6 +362,23 @@ def contact(request):
         messages.success(request, 'Your message has been sent!')
         return redirect('index')
     return render(request, 'contact.html')
+
+
+def cust_availability(request):
+    user = request.user
+    payments = Payment.objects.filter(user=user)
+    approvals = PaymentApproval.objects.filter(payment__in=payments)
+
+    context = {
+        'payments': payments,
+        'approvals': approvals,
+    }
+
+
+    return render(request, 'cust_availability.html', context)
+
+
+
 
 
 

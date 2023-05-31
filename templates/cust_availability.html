@@ -61,21 +61,44 @@
     />
 
     <!-- Template Main CSS File -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-+TntT4TDs/4eihxlpW8X4/uh4z+vUEuVYZm30mW8LwYHStOc3m/WF3q1W8GvMjKtRl+v7V/FJW/d2QYvYBCfPQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/custome.css'%} " rel="stylesheet" />
     <link href="{% static 'assets/css/nima.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
-    <link href="{% static 'assets/css/me.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/cover.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/iconmoon.css' %}" rel="stylesheet" />
+    
     <!-- =======================================================
   * Template Name: Restaurantly - v3.1.0
   * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+
+  <style>
+    .table {
+      border-collapse: separate;
+      border-spacing: 0 5px;
+      border-radius: 100px;
+    }
+  
+    .table th,
+    .table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+    }
+  
+    .table tbody tr:last-child td {
+      border-bottom: none;
+    }
+  </style>
   </head>
 
   <body>
     <!-- ======= Top Bar ======= -->
-    <div id="topbar" class="d-flex align-items-center fixed-top">
+     <!-- ======= Top Bar ======= -->
+     <div id="topbar" class="d-flex align-items-center fixed-top">
       <div
         class="container d-flex justify-content-center justify-content-md-between"
       >
@@ -89,6 +112,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-cente">
@@ -104,17 +128,21 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
+              <a class="nav-link scrollto active" href="/"
+                >Home</a
+              >
             </li>
             <li>
-              <a class="nav-link{% if request.path == '/about/' %} active{% endif %}" href="/about/">About us</a>
+              <a class="nav-link scrollto" href="/about/"
+                >About us</a
+              >
             </li>
             <li><a class="nav-link scrollto" href="/#gallery">Gallery</a></li>
             <li>
               <a class="nav-link scrollto" href="/#book-a-table">Reservation</a>
             </li>
             <li>
-              <a class="nav-link{% if request.path == '/contact/' %} active{% endif %}" href="/contact/">Contact us</a>
+              <a class="nav-link scrollto" href="/#contact">Contact us</a>
             </li>
             {% if user.is_authenticated %}
             <li class="nav-item dropdown">
@@ -135,81 +163,94 @@
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>
+
         <!-- .navbar -->
       </div>
     </header>
     <!-- End Header -->
-    <br><br><br><br><br><br>
 
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="instructions">
-            <h2 style="font-weight: bolder; font-size: 21px">SCAN TO PAY</h2></br><br>
-            <p>1. Please scan the QR code given above to make payment.</p></br>
-            <p>2. Please take a screenshot. We will ask for it later.</p><br><br>
-            <div class="qr-code">
-              <img
-                src="{% static 'assets/img/nimahero.jpg' %}"
-                alt="QR Code"
-              />
-            </div><br>
+<main id="main">
+  <div class="wrapper">
+    <!-- Main Section Start -->
+    <div class="main-section">
+      {% include 'cover.html' %}
+      <div class="page-section account-header buyer-logged-in">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+              <div class="user-dashboard loader-holder">
+                <div class="user-holder">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                      <div class="element-title has-border right-filters-row">
+                        <h5 style="color: black">Payment Approval</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                      <div class="user-orders-list">
+                        <div class="table-responsive">
+                          <table class="table table-hover">
+                            <thead class="thead-light">
+                              <tr>
+                                <th class="text-center">Payment ID</th>
+                                <th class="text-center">Account Number</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Phone Number</th>
+                                <th class="text-center">Screenshot</th>
+                                <th class="text-center">Created At</th>
+                                <th class="text-center">Approval Status</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- ... your existing code ... -->
 
-            <p>NAME: NIMA TENZIN THINLEY</p>
-          </div>
-        </div>
-        <div class="col-md-8">
-          <div class="payment-form">
-            <h1
-              style="
-                color: #5995fd;
-                font-size: 21px;
-                text-align: center;
-                font-weight: bolder;
-              "
-            >
-              PAYMENT
-            </h1>
-            <br /><br />
-            <form method="post" action="{% url 'payment' %}" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="form-group">
-                <label for="account_number">ACCOUNT NUMBER</label>
-                <input type="number" id="account_number" name="account_number" min="0" oninput="validity.valid||(value='')" required />
+{% for payment in payments %}
+{% if payment.user == request.user %}
+    <tr>
+        <td class="text-center">{{ payment.id }}</td>
+        <td class="text-center">{{ payment.account_number }}</td>
+        <td class="text-center">{{ payment.email }}</td>
+        <td class="text-center">{{ payment.phone_number }}</td>
+        <td class="text-center"><img src="{{ payment.screenshot.url }}" width="100"></td>
+        <td class="text-center">{{ payment.created_at }}</td>
+        <td class="text-center">
+            {% if payment.paymentapproval.approved %}
+                <span class="badge badge-success">Approved</span><br> on {{ payment.paymentapproval.approved_at }}
+            {% elif payment.paymentapproval.cancelled %}
+                <span class="badge badge-danger">Cancelled</span><br>on {{ payment.paymentapproval.cancelled_at }}
+            {% else %}
+                <span class="badge badge-warning">Pending</span>
+            {% endif %}
+        </td>
+    </tr>
+{% endif %}
+{% empty %}
+<tr>
+    <td colspan="9" class="text-center"><p>No payments to approve.</p></td>
+</tr>
+{% endfor %}
+
+<!-- ... your existing code ... -->
+
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="email">EMAIL</label>
-                <input type="email" id="email" name="email" value="{{ request.user.email }}" required readonly />
-              </div>
-              <div class="form-group">
-                <label for="phone_number">PHONE NUMBER</label>
-                <input type="tel" id="phone_number" name="phone_number" value="{{ request.user.phone_number }}" required readonly />
-              </div>
-              <div class="form-group">
-                <label for="screenshot">SCREENSHOT</label>
-                <input type="file" id="screenshot" name="screenshot" required />
-              </div>
-              <br />
-              <div class="form-group">
-                <button type="submit" class="pay">PAY NOW</button>
-                <button type="button" href="/" class="cancel">CANCEL</button>
-                <br><br>
-               
-              </div>
-             
-            </form>    
-            <div>
-              {% include 'alerts.html' %}
             </div>
             
-          </div> 
+          </div>
         </div>
+       
       </div>
     </div>
-    
-
-    <br><br><br><br><br><br>
-
+  </div>
+</main>
     <!-- ======= Footer ======= -->
 
     <footer id="footer">

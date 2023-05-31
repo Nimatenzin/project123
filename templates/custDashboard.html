@@ -1,298 +1,72 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+{% extends 'base.html' %} 
+{% block content %}
+<br /><br /><br /><br /><br />
+<div class="container-fluid p-4">
+  <div class="row justify-content-center"> <!-- Center the row -->
+    <!-- {% if messages %}
+    <ul class="messages text-center" id="messages-container">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} -->
 
-    <title>Aqua Blue</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css"
-      integrity="sha512-W3ZfgmZ5g1rCPFiCbOb+tn7g7sQWOQCB1AkDqrBG1Yp3iDjY9KYFh/k1AWxrt85LX5BRazEAuv+5DV2YZwghag=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <meta content="" name="description" />
-    <meta content="" name="keywords" />
-
-    <!-- Favicons -->
-    <link href="{% static 'assets/img/swim.png' %}" rel="icon" />
-    <link
-      href="{% static 'assets/img/apple-touch-icon.png' %}"
-      rel="apple-touch-icon"
-    />
-
-    <!-- Google Fonts -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-      rel="stylesheet"
-    />
-
-    <!-- Vendor CSS Files -->
-    <link
-      href="{% static 'assets/vendor/animate.css/animate.min.css' %}"
-      rel="stylesheet"
-    />
-    <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet" />
-    <link
-      href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}"
-      rel="stylesheet"
-    />
-    <link
-      href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}"
-      rel="stylesheet"
-    />
-
-    <!-- Template Main CSS File -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-+TntT4TDs/4eihxlpW8X4/uh4z+vUEuVYZm30mW8LwYHStOc3m/WF3q1W8GvMjKtRl+v7V/FJW/d2QYvYBCfPQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
-    <link href="{% static 'assets/css/custome.css'%} " rel="stylesheet" />
-    <link href="{% static 'assets/css/nima.css' %}" rel="stylesheet" />
-    <link href="{% static 'assets/css/cover.css' %}" rel="stylesheet" />
-    <link href="{% static 'assets/css/iconmoon.css' %}" rel="stylesheet" />
-    
-    <!-- =======================================================
-  * Template Name: Restaurantly - v3.1.0
-  * Template URL: https://bootstrapmade.com/restaurantly-restaurant-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-
-
-  <style>
-    .table {
-      border-collapse: separate;
-      border-spacing: 0 5px;
-      border-radius: 100px;
-    }
-  
-    .table th,
-    .table td {
-      border: 1px solid #ddd;
-      padding: 10px;
-    }
-  
-    .table tbody tr:last-child td {
-      border-bottom: none;
-    }
-  </style>
-  </head>
-
-  <body>
-    <!-- ======= Top Bar ======= -->
-     <!-- ======= Top Bar ======= -->
-     <div id="topbar" class="d-flex align-items-center fixed-top">
-      <div
-        class="container d-flex justify-content-center justify-content-md-between"
-      >
-        <div class="contact-info d-flex align-items-center">
-          <i class="bi bi-phone d-flex align-items-center"
-            ><span>+975 17797835</span></i
-          >
-          <i class="bi bi-clock d-flex align-items-center ms-4"
-            ><span> Mon-Sat: 9AM - 6PM</span></i
-          >
-        </div>
-      </div>
-    </div>
-
-
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-cente">
-      <div
-        class="container-fluid container-xl d-flex align-items-center justify-content-lg-between"
-      >
-        <h1 class="logo me-auto me-lg-0">
-          <a href="/">Aqua Blue</a>
-        </h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-
-        <nav id="navbar" class="navbar order-last order-lg-0">
-          <ul>
-            <li>
-              <a class="nav-link scrollto active" href="/"
-                >Home</a
-              >
-            </li>
-            <li>
-              <a class="nav-link scrollto" href="/about/"
-                >About us</a
-              >
-            </li>
-            <li><a class="nav-link scrollto" href="/#gallery">Gallery</a></li>
-            <li>
-              <a class="nav-link scrollto" href="/#book-a-table">Reservation</a>
-            </li>
-            <li>
-              <a class="nav-link scrollto" href="/#contact">Contact us</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/myAccount/" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ user.username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
-                    <li><a class="dropdown-item" href="{% url 'cprofile' %}">My Profile</a></li>
-                    <li><a class="dropdown-item" href="/custDashboard/">Dashboard</a></li>
-                    <li><a class="dropdown-item" href="/logout/" class="text-danger">Logout</a></li>
-                </ul>
-            </li>
-        {% else %}
-            <li><a href="/login/" class="nav-link scrollto">Sign In</a></li>
-            <li><a href="/registerUser/" class="nav-link scrollto">Sign Up</a></li>
-        {% endif %}
-        
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-
-        <!-- .navbar -->
-      </div>
-    </header>
-    <!-- End Header -->
-
-<main id="main">
-  <div class="wrapper">
-    <!-- Main Section Start -->
-    <div class="main-section">
-      {% include 'cover.html' %}
-      <div class="page-section account-header buyer-logged-in">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-              <div class="user-dashboard loader-holder">
-                <div class="user-holder">
-                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="row">
-                      <div class="element-title has-border right-filters-row">
-                        <h5 style="color: black">Payment Approval</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                      <div class="user-orders-list">
-                        <div class="table-responsive">
-                          <table class="table table-hover">
-                            <thead class="thead-light">
-                              <tr>
-                                <th class="text-center">Payment ID</th>
-                                <th class="text-center">Account Number</th>
-                                <th class="text-center">Total Amount</th>
-                                <th class="text-center">Journal Number</th>
-                                <th class="text-center">Email</th>
-                                <th class="text-center">Phone Number</th>
-                                <th class="text-center">Screenshot</th>
-                                <th class="text-center">Created At</th>
-                                <th class="text-center">Approval Status</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {% for payment in payments %}
-                              <tr>
-                                <td class="text-center">{{ payment.id }}</td>
-                                <td class="text-center">{{ payment.account_number }}</td>
-                                <td class="text-center">{{ payment.total_amount }}</td>
-                                <td class="text-center">{{ payment.journal_number }}</td>
-                                <td class="text-center">{{ payment.email }}</td>
-                                <td class="text-center">{{ payment.phone_number }}</td>
-                                <td class="text-center"><img src="{{ payment.screenshot.url }}" width="100"></td>
-                                <td class="text-center">{{ payment.created_at }}</td>
-                                <td class="text-center">
-                                  {% with approval=payment.paymentapproval %}
-                                  {% if approval.approved %}
-                                  <span class="badge badge-success">Approved</span><br> on {{ approval.approved_at }}
-                                  {% elif approval.cancelled %}
-                                  <span class="badge badge-danger">Cancelled</span><br>on {{ approval.cancelled_at }}
-                                  {% else %}
-                                  <span class="badge badge-warning">Pending</span>
-                                  {% endif %}
-                                  {% endwith %}
-                                </td>
-                              </tr>
-                              {% empty %}
-                              <tr>
-                                <td colspan="9" class="text-center"><p>No payments to approve.</p></td>
-                              </tr>
-                              {% endfor %}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-       
-      </div>
+    <div class="col-12">
+      <h1 class="text-center mb-5">
+        User-Dashboard : Hello, {{ user.username }}!
+      </h1>
     </div>
   </div>
-</main>
-    <!-- ======= Footer ======= -->
-
-    <footer id="footer">
-      <div class="container">
-        <div class="copyright">
-          &copy; Copyright
-          <strong><span style="color: #3b71ca">Aqua Blue</span></strong
-          >. All Rights Reserved
-        </div>
-        <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
-          Designed by <a href="#" style="color: #3b71ca">AQUA BLUE TEAM</a>
+  <div class="row justify-content-center"> <!-- Center the row -->
+    <div class="col-sm-6 col-lg-3 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <img
+            class="card-img-top"
+            src="https://img.freepik.com/premium-vector/male-character-holding-huge-magnifying-glass-concept-information-research-frequently-asked-questions-query_87771-24149.jpg?w=740"
+            alt="Booking History"
+          />
+          <h5 class="card-title text-dark">View Booking Details</h5>
+          <p class="card-text text-dark">
+            View your booking history and status
+          </p>
+          <a href="{% url 'cust_availability' %}" class="btn btn-primary" style="background-color: #3b71ca"
+            >View Details</a
+          >
         </div>
       </div>
-    </footer>
+    </div>
+   
+    <div class="col-sm-6 col-lg-3 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <img
+            class="card-img-top"
+            src="https://img.freepik.com/free-vector/online-calendar-concept-illustration_114360-5111.jpg?w=740&t=st=1681856398~exp=1681856998~hmac=bb5901f4416fcb70f93d71a3e6f56f622744967bcb6d75fdc1bb45124e07b8c8"
+            alt="Make Reservation"
+          />
+          <h5 class="card-title text-dark">Make Reservation</h5>
+          <p class="card-text text-dark">Book a new slot</p>
+          <a href="/#book-a-table" class="btn btn-primary" style="background-color: #3b71ca"
+            >Book Now</a
+          >
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-12 text-center">
+      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    </div> -->
+  </div>
+</div>
+<!-- <script>
+  // Get the messages container element
+  const messagesContainer = document.querySelector('#messages-container');
 
-    <div id="preloader"></div>
-    <a
-      href="#"
-      class="back-to-top d-flex align-items-center justify-content-center"
-      ><i class="bi bi-arrow-up-short"></i
-    ></a>
+  // Hide messages after 5 seconds
+  setTimeout(() => {
+    messagesContainer.style.display = 'none';
+  }, 5000);
+</script> -->
+{% endblock %}
 
-    <!-- Vendor JS Files -->
-    <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
-    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-    <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
-
-    <!-- Template Main JS File -->
-    <script>
-      function scrollToSection(sectionId) {
-        const section = document.getElementById(sectionId);
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
-    </script>
-
-    <script src="{% static 'assets/js/main.js' %}"></script>
-  </body>
-</html>
 
