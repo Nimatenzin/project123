@@ -32,6 +32,8 @@
       href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-Wskj3nqUJlAN7MZXQvE1xKLuA9/YwG5pDc/EB/8fXZzUd0YYqVQJmCFLzqsdXvdd" crossorigin="anonymous">
+
 
     <!-- Vendor CSS Files -->
     <link
@@ -61,6 +63,7 @@
     />
 
     <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/iconmoon.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
     <link href="{% static 'assets/css/custome.css'%} " rel="stylesheet" />
     <link href="{% static 'assets/css/nima.css' %}" rel="stylesheet" />
@@ -172,7 +175,7 @@
                                                                   {% if profile.profile_picture %}
                                                                   <img class="thumbnail" src="{{profile.profile_picture.url}}" alt="Profile Picture">
                                                                   {% else %}
-                                                                  <img class="thumbnail" src="{% static 'assets/img/default-profile.png' %}" alt="Profile Picture">
+                                                                  <img class="thumbnail" src="{% static 'assets/img/noimage.png' %}" alt="Profile Picture">
                                                                   {% endif %}
                                                               </div>
                                                           </div>
@@ -198,7 +201,7 @@
                                                                   {% if profile.cover_photo %}
                                                                   <img class="thumbnail" src="{{profile.cover_photo.url}}" alt="Cover Photo">
                                                                   {% else %}
-                                                                  <img class="thumbnail" src="{% static 'assets/img/default-cover.png' %}" alt="Cover Photo">
+                                                                  <img class="thumbnail" src="{% static 'assets/img/2.png' %}" alt="Cover Photo">
                                                                   {% endif %}
                                                               </div>
                                                           </div>

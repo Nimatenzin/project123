@@ -1,8 +1,8 @@
 {% autoescape off %}
 
-Hi {{user.username}},
+Hi {{ user.username }},
 
-please click on regiteration.
+please click on link to activate.
 
 http://{{domain}}{% url 'activate' uidb64=uid token=token %}
 

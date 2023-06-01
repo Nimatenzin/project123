@@ -1,5 +1,5 @@
 {% load static %}
-<div class="page-section restaurant-detail-image-section" style=" background: url({% if user_profile.cover_photo %}{{ user_profile.cover_photo.url }} {% else %} {% static 'assets/img/cover-photo01.jpg' %} {% endif %}) no-repeat scroll 0 0 / cover;">
+<div class="page-section restaurant-detail-image-section" style=" background: url({% if user_profile.cover_photo %}{{ user_profile.cover_photo.url }} {% else %} {% static 'assets/img/2.png' %} {% endif %}) no-repeat scroll 0 0 / cover;">
     <!-- Container Start -->
     <div class="container" style="padding-top:20px;">
       <!-- Row Start -->
@@ -13,18 +13,26 @@
                   {% if user_profile.profile_picture %}
                   <img src="{{ user_profile.profile_picture.url }}" alt="Profile Picture">
                   {% else %}
-                  <img src="{% static 'assets/img/listing-logo18.png' %}" alt="">
+                  <img src="{% static 'assets/img/noimage.png' %}" alt="">
                   {% endif %}
               </figure>
               </div>
 
               <div class="text-holder">
-                <span class="restaurant-title">{{user.username}}</span>
-                <div class="text" style="margin-left:-20px;">
-                  <p>{{user.phone_number}}</p>
-                  <p> {{ user.email }}</p>
+                <span class="restaurant-title">
+                  <i ></i> {{user.username}}
+                </span>
+                <div class="text" style="margin-left: -20px;">
+                  <p>
+                    <i></i> {{user.phone_number}}
+                  </p>
+                  <p>
+                    <i></i> {{user.email}}
+                  </p>
                 </div>
               </div>
+              
+              
             </div>
           </div>
         </div>
