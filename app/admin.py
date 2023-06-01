@@ -12,7 +12,6 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(User,  CustomUserAdmin)
 # admin.site.register(UserProfile)
-
 from django.contrib import admin
 from .models import Schedule, TimeSlot
 
@@ -21,12 +20,16 @@ class TimeSlotInline(admin.TabularInline):
 
 class ScheduleAdmin(admin.ModelAdmin):
     inlines = [TimeSlotInline]
+    list_display = ['date']
+
+class TimeSlotAdmin(admin.ModelAdmin):
+    list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots', 'schedule']
 
 admin.site.register(Schedule, ScheduleAdmin)
-admin.site.register(TimeSlot)
+admin.site.register(TimeSlot, TimeSlotAdmin)
+
 
 # admin.py
-
 from django.contrib import admin
 from .models import Payment, PaymentApproval
 
@@ -34,14 +37,35 @@ class PaymentApprovalInline(admin.TabularInline):
     model = PaymentApproval
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'account_number','email', 'phone_number', 'screenshot', 'created_at')
+    list_display = ('id', 'account_number', 'email', 'phone_number', 'screenshot', 'created_at')
     inlines = [PaymentApprovalInline]
 
-    def journal_number(self, obj):
-        return obj.journal_number
-
 admin.site.register(Payment, PaymentAdmin)
-admin.site.register(PaymentApproval)
+
+class PaymentApprovalAdmin(admin.ModelAdmin):
+    list_display = ('id', 'payment_account_number', 'payment_email', 'payment_phone_number', 'payment_screenshot', 'payment_created_at', 'approval_status',)
+
+    def payment_account_number(self, obj):
+        return obj.payment.account_number
+
+    def payment_email(self, obj):
+        return obj.payment.email
+
+    def payment_phone_number(self, obj):
+        return obj.payment.phone_number
+
+    def payment_screenshot(self, obj):
+        return obj.payment.screenshot
+
+    def payment_created_at(self, obj):
+        return obj.payment.created_at
+
+    def approval_status(self, obj):
+        return 'Approved' if obj.approved else 'Cancelled' if obj.cancelled else 'Pending'
+
+admin.site.register(PaymentApproval, PaymentApprovalAdmin)
+
+
 
 from django.contrib import admin
 from .models import Image
