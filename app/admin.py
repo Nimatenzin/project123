@@ -1,19 +1,18 @@
 from django.contrib import admin
-from .models import User, UserProfile
-from django.contrib.auth.admin import UserAdmin
+from .models import User, UserProfile, Schedule, TimeSlot, Payment, PaymentApproval, Image, Contact
+from django.contrib.auth.admin import UserAdmin, Group
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
-    list_display = ('email', 'username', 'phone_number','role', 'is_active')
+    list_display = ('email', 'username', 'phone_number', 'role', 'is_active')
     ordering = ('-date_joined',)
     filter_horizontal = ()
     list_filter = ()
     fieldsets = ()
+    icon = 'fas fa-user'
 
-admin.site.register(User,  CustomUserAdmin)
-# admin.site.register(UserProfile)
-from django.contrib import admin
-from .models import Schedule, TimeSlot
+admin.site.register(User, CustomUserAdmin)
+admin.site.unregister(Group)
 
 class TimeSlotInline(admin.TabularInline):
     model = TimeSlot
@@ -23,15 +22,10 @@ class ScheduleAdmin(admin.ModelAdmin):
     list_display = ['date']
 
 class TimeSlotAdmin(admin.ModelAdmin):
-    list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots', 'schedule']
+    list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots',]
 
 admin.site.register(Schedule, ScheduleAdmin)
 admin.site.register(TimeSlot, TimeSlotAdmin)
-
-
-# admin.py
-from django.contrib import admin
-from .models import Payment, PaymentApproval
 
 class PaymentApprovalInline(admin.TabularInline):
     model = PaymentApproval
@@ -39,6 +33,8 @@ class PaymentApprovalInline(admin.TabularInline):
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('id', 'account_number', 'email', 'phone_number', 'screenshot', 'created_at')
     inlines = [PaymentApprovalInline]
+    search_fields = ('email', 'phone_number')
+
 
 admin.site.register(Payment, PaymentAdmin)
 
@@ -65,27 +61,17 @@ class PaymentApprovalAdmin(admin.ModelAdmin):
 
 admin.site.register(PaymentApproval, PaymentApprovalAdmin)
 
-
-
-from django.contrib import admin
-from .models import Image
-
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'image',)
-    
+
 admin.site.register(Image, ImageAdmin)
-
-
-from django.contrib import admin
-from app.models import Contact
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'occupation', 'created_at')
 
 admin.site.register(Contact, ContactAdmin)
 
-
-
-
-
-
+# Remove the add button from all classes except Schedule
+for model, model_admin in admin.site._registry.items():
+    if model not in [Schedule, Image]:
+        model_admin.has_add_permission = lambda request: False
