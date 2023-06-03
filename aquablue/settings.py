@@ -94,27 +94,27 @@ WSGI_APPLICATION = 'aquablue.wsgi.application'
 # }
 
 
-from decouple import config
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER':  config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-
-
-    }
-}
-
-# import dj_database_url
+# from decouple import config
 
 # DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'USER':  config('DB_USER'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
 
-#     'default': dj_database_url.parse('postgres://productiondatabase_9uaa_user:wIc6LcgwKdU7Xb1z49ewdUeJcbowy5wA@dpg-chrg1s8rddlba9v8037g-a.singapore-postgres.render.com/productiondatabase_9uaa')
 
+#     }
 # }
+
+import dj_database_url
+
+DATABASES = {
+
+    'default': dj_database_url.parse('postgres://productiondatabase_9uaa_user:wIc6LcgwKdU7Xb1z49ewdUeJcbowy5wA@dpg-chrg1s8rddlba9v8037g-a.singapore-postgres.render.com/productiondatabase_9uaa')
+
+}
 
 AUTH_USER_MODEL = 'app.User'
 
