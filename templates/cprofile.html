@@ -147,116 +147,112 @@
     </header>
     <!-- End Header -->
 
-    <main id="main"> 
+    <main id="main">
       {% include 'cover.html' %}
       <div class="wrapper">
-        <!-- Main Section Start -->
         <div class="main-section">
           <div class="page-section account-header buyer-logged-in">
             <div class="container">
-              <div class="row">
+              <div class="row justify-content-center">
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
                   <div class="user-dashboard loader-holder">
                     <div class="user-holder">
-                      <h5 style="color: black">Profile Settings</h5><br><br>
+                      <h5 class="mb-4 text-center text-dark" style="font-weight:bold; text-transform:uppercase;">Profile Setting</h5>
                       <form action="{% url 'cprofile' %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-fields-set">
-                          <ul>
-                              <li>
-                                  <div class="row">
-                                      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                          <div class="restaurant-info">
-                                              <div class="img-holder">
-                                                  <ul class="foodbakery-gallery-holder">
-                                                      <li class="gal-img">
-                                                          <div class="drag-list">
-                                                              <div class="item-thumb">
-                                                                  {% if profile.profile_picture %}
-                                                                  <img class="thumbnail" src="{{profile.profile_picture.url}}" alt="Profile Picture">
-                                                                  {% else %}
-                                                                  <img class="thumbnail" src="{% static 'assets/img/noimage.png' %}" alt="Profile Picture">
-                                                                  {% endif %}
-                                                              </div>
-                                                          </div>
-                                                      </li>
-                                                  </ul>
-                                              </div>
-                                              <div class="text-holder">
-                                                  <label>Update Profile Picture</label>
-                                                  <div class="upload-gallery">
-                                                      {{profile_form.profile_picture}}
-                                                  </div>
-                                              </div>
-                                              <label class="text-danger">{{ profile_form.profile_picture.errors }}</label>
-                                          </div>
+                          <div class="row">
+                            <div class="col-lg-12 mb-4">
+                              <h6 class="text-center text-dark">Choose Profile Picture</h6> <br>
+                              <div class="d-flex justify-content-center">
+                                <div class="img-holder">
+                                  <ul class="foodbakery-gallery-holder">
+                                    <li class="gal-img">
+                                      <div class="drag-list">
+                                        <div class="item-thumb">
+                                          {% if profile.profile_picture %}
+                                            <img class="thumbnail" src="{{profile.profile_picture.url}}" alt="Profile Picture">
+                                          {% else %}
+                                            <img class="thumbnail" src="{% static 'assets/img/user.png' %}" alt="Profile Picture">
+                                          {% endif %}
+                                        </div>
                                       </div>
-                                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                          <div class="restaurant-info">
-                                              <div class="img-holder">
-                                                  <ul class="foodbakery-gallery-holder">
-                                                      <li class="gal-img">
-                                                          <div class="drag-list">
-                                                              <div class="item-thumb">
-                                                                  {% if profile.cover_photo %}
-                                                                  <img class="thumbnail" src="{{profile.cover_photo.url}}" alt="Cover Photo">
-                                                                  {% else %}
-                                                                  <img class="thumbnail" src="{% static 'assets/img/2.png' %}" alt="Cover Photo">
-                                                                  {% endif %}
-                                                              </div>
-                                                          </div>
-                                                      </li>
-                                                  </ul>
-                                              </div>
-                                              <div class="text-holder">
-                                                  <label>Update Cover Photo</label>
-                                                  <div class="upload-gallery">
-                                                      {{profile_form.cover_photo}}
-                                                  </div>
-                                                  
-                                              </div>
-                                              <label class="text-danger">{{ profile_form.cover_photo.errors }}</label>
-                                          </div>
-                                      </div>  
-                                      
-                                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                          <div class="field-holder">
-                                              <label>Username *</label>
-                                              {{user_form.username}}
-                                          </div>
-                                      </div>
-                                      
-                                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                          <div class="field-holder">
-                                              <label>Phone Number *</label>
-                                              {{user_form.phone_number}}
-                                          </div>
-                                      </div>          
-                                      
-                                  </div>
-                              </li>
-                          </ul>
-                          <div>
-                              <div class="field-holder">
-                                  <div class="payment-holder input-button-loader">
-                                      <input type="submit" value="Update Profile">
-                                  </div>
+                                    </li>
+                                  </ul>
+                                </div>
                               </div>
+                              <div class="text-center">
+                                <div class="upload-gallery mt-3">
+                                  <div class="custom-file">
+                                    {{profile_form.profile_picture}}
+                                    
+                                  </div>
+                                </div>
+                                <label class="text-danger">{{ profile_form.profile_picture.errors }}</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-12 mb-4">
+                              <h6 class="text-center text-dark">Choose Cover Photo</h6>
+                              <div class="d-flex justify-content-center">
+                                <div class="img-holder">
+                                  <ul class="foodbakery-gallery-holder">
+                                    <li class="gal-img">
+                                      <div class="drag-list">
+                                        <div class="item-thumb">
+                                          {% if profile.cover_photo %}
+                                            <img class="thumbnail" src="{{profile.cover_photo.url}}" alt="Cover Photo">
+                                          {% else %}
+                                            <img style="width:200px; border-radius:10px;" src="{% static 'assets/img/backgroundimg.jpeg' %}" alt="Cover Photo">
+                                          {% endif %}
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                              <div class="text-center">
+                                <div class="upload-gallery mt-3">
+                                  <div class="custom-file">
+                                    {{profile_form.cover_photo}}
+                                    
+                                  </div>
+                                </div>
+                                <label class="text-danger">{{ profile_form.cover_photo.errors }}</label>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="field-holder">
+                                <label>Username *</label>
+                                {{user_form.username}}
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="field-holder">
+                                <label>Phone Number *</label>
+                                {{user_form.phone_number}}
+                              </div>
+                            </div>
                           </div>
-                      </div>
+                          <div class="mt-4">
+                            <div class="field-holder">
+                              <div class="payment-holder input-button-loader text-center" style="background-color:#5995fd; border-radius:5px; padding:5px;">
+                                <input type="submit" class="btn btn" value="Update Profile">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </form>
-                    
                     </div>
                   </div>
                 </div>
               </div>
               {% include 'alerts.html' %}
             </div>
-           
           </div>
         </div>
       </div>
     </main>
+    
 
     <!-- ======= Footer ======= -->
 

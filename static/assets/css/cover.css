@@ -1961,3 +1961,7 @@ body {
   
   /* WOOCOMMERCE END */
   
+
+.btn-info {
+  background-color: red;
+}

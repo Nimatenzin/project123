@@ -360,7 +360,7 @@ def contact(request):
         contact = Contact(name=name, occupation=occupation, message=message)
         contact.save()
         messages.success(request, 'Your message has been sent!')
-        return redirect('index')
+        return redirect('contact')
     return render(request, 'contact.html')
 
 
