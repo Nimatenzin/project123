@@ -1961,7 +1961,13 @@ body {
   
   /* WOOCOMMERCE END */
   
+  .btn-info{
 
-.btn-info {
-  background-color: red;
-}
+    background-color: #f8f9fa;
+  } 
+
+  
+  .btn-info:hover {
+    background-color: #5995fd;
+  }
+  
