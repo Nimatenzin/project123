@@ -1968,23 +1968,23 @@ body {
 
   
   .btn-info:hover {
-    background-color: #5995fd;
+    background-color: #4caf50;
   }
   
   
-.btn-info.custom-file-label {
+.btn-info {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0.375rem 0.75rem;
-  border: 1px solid #0dcaf0;
+  border: 1px solid;
   border-radius: 0.25rem;
-  background-color: #0dcaf0;
+  background-color:  #5995fd;
   color: #fff;
   cursor: pointer;
 }
 
-.btn-info.custom-file-label::after {
+.btn-info {
   content: "No file chosen";
   display: inline-block;
   width: 100%;

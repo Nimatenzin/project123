@@ -75,7 +75,7 @@
   ======================================================== -->
   </head>
 
-  <body>
+  <body style="background: url('/static/assets/img/bo.jpg') top center; background-size: cover; position: relative; padding: 0; min-height: 100vh;">
     <!-- ======= Top Bar ======= -->
     <div id="topbar" class="d-flex align-items-center fixed-top">
       <div
@@ -93,7 +93,7 @@
     </div>
 
     <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top d-flex align-items-cente">
+    <header id="header" class="fixed-top d-flex align-items-cente" >
       <div
         class="container-fluid container-xl d-flex align-items-center justify-content-lg-between"
       >
@@ -145,53 +145,53 @@
 	<br><br><br>
 	
 	<main>
-
-	<section>
-
-    <h2 class="hd">Available Time Slots</h2>
-	{% if time_slots %}
-		<table>
-			<thead>
-				<tr>
-					<th>Start Time</th>
-					<th>End Time</th>
-					<th>Total Adults Slots</th>
-					<th>Total Child Slots</th>
-					<th>Available Adults Slots</th>
-					<th>Available Child Slots</th>
-					<th>Booked Adults Slots</th>
-					<th>Booked Child Slots</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for time_slot in time_slots %}
-					<tr class= "tr">
-						<td>{{ time_slot.start_time }}</td>
-						<td>{{ time_slot.end_time }}</td>
-						<td>{{ time_slot.total_adults_slots }}</td>
-						<td>{{ time_slot.total_child_slots }}</td>
-						<td>{{ time_slot.available_adults_slots }}</td>
-						<td>{{ time_slot.available_child_slots }}</td>
-						<td>{{ time_slot.booked_adults_slots }}</td>
-						<td>{{ time_slot.booked_child_slots }}</td>
-						<td>
-							<form method="post" action="{% url 'book_time_slot' time_slot.id %}">
-								{% csrf_token %}
-								<button type="submit">Book</button>
-							</form>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-			{% include 'alerts.html' %}
-		</table>
-	{% else %}
-		<p>No available time slots for the selected date.</p>
-	{% endif %}
-
-	</section>
-</main>
+    <section class="container">
+      <h2 class="hd">Available Time Slots</h2>
+      {% if time_slots %}
+        <div class="table-container">
+          <table style="border: 2px solid black; border-radius: 50px;">
+            <thead>
+              <tr>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Total Adults Slots</th>
+                <th>Total Child Slots</th>
+                <th>Available Adults Slots</th>
+                <th>Available Child Slots</th>
+                <th>Booked Adults Slots</th>
+                <th>Booked Child Slots</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for time_slot in time_slots %}
+                <tr class="tr">
+                  <td>{{ time_slot.start_time }}</td>
+                  <td>{{ time_slot.end_time }}</td>
+                  <td>{{ time_slot.total_adults_slots }}</td>
+                  <td>{{ time_slot.total_child_slots }}</td>
+                  <td>{{ time_slot.available_adults_slots }}</td>
+                  <td>{{ time_slot.available_child_slots }}</td>
+                  <td>{{ time_slot.booked_adults_slots }}</td>
+                  <td>{{ time_slot.booked_child_slots }}</td>
+                  <td>
+                    <form method="post" action="{% url 'book_time_slot' time_slot.id %}">
+                      {% csrf_token %}
+                      <button type="submit">Book</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% include 'alerts.html' %}
+      {% else %}
+        <p>No available time slots for the selected date.</p>
+      {% endif %}
+    </section>
+  </main>
+  
 	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     <!-- ======= Footer ======= -->

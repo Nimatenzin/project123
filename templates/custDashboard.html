@@ -1,7 +1,7 @@
 {% extends 'base.html' %} 
 {% block content %}
 <br /><br /><br /><br /><br />
-<div class="container-fluid p-4">
+<div class="container-fluid p-4" style="background: url('/static/assets/img/wang.jpg') top center; background-size: cover; position: relative; padding: 0; min-height: 100vh;">
   <div class="row justify-content-center"> <!-- Center the row -->
     <!-- {% if messages %}
     <ul class="messages text-center" id="messages-container">
@@ -30,9 +30,9 @@
           <p class="card-text text-dark">
             View your booking history and status
           </p>
-          <a href="{% url 'cust_availability' %}" class="btn btn-primary" style="background-color: #3b71ca"
-            >View Details</a
-          >
+          <button type="submit" class="btn btn-primary"><a href="{% url 'cust_availability' %}"  style="color:white;"
+            >VIEW DETAILS </a
+          > </button>
         </div>
       </div>
     </div>
@@ -47,9 +47,12 @@
           />
           <h5 class="card-title text-dark">Make Reservation</h5>
           <p class="card-text text-dark">Book a new slot</p>
-          <a href="/#book-a-table" class="btn btn-primary" style="background-color: #3b71ca"
+          {% comment %} <a href="/#book-a-table" class="btn btn-primary" style="background-color: #3b71ca"
             >Book Now</a
-          >
+          > {% endcomment %}
+          <button type="submit" class="btn btn-primary"><a href="/#book-a-table"  style="color:white;"
+            >BOOK NOW </a
+          > </button>
         </div>
       </div>
     </div>

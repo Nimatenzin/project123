@@ -42,14 +42,16 @@
 				</div>
 				<ul class="errorlist">
 					{% for field in form %}
-						{% if field.errors %}
-							{% for error in field.errors %}
-								<li style="color: red;">{{error}}</li>
-							{% endfor %}
-						{% endif %}
+					  {% if field.errors %}
+						{% for error in field.errors %}
+						  <li style="color: red;">{{ error }}</li>
+						{% endfor %}
+					  {% endif %}
 					{% endfor %}
-					<li style="color: red;">{{form.non_field_errors}}</li>
-				</ul> 
+					{% if form.non_field_errors %}
+					  <li style="color: red;">{{ form.non_field_errors|first }}</li>
+					{% endif %}
+				  </ul>				  
 				<div class="form-group row">
 					<div class="col-sm-12 text-center">
 						<button type="submit" class="btn btn-primary" id="son" style="background-color: #5995fd;">Signup</button>
