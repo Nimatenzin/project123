@@ -10,12 +10,15 @@
             <header class="header">
               <h1 id="title" class="text-light" style="padding-bottom:5px;">Booking Details</h1>
             </header>
+            <br>
             {% if not time_slot %}
               <p>Time slot not found.</p>
             {% else %}
               <p>Time slot: {{ time_slot.start_time|date:'l, F j, Y' }} from {{ time_slot.start_time|time:'h:i A' }} to {{ time_slot.end_time|time:'h:i A' }}</p>
               <p>Available adult slots: {{ time_slot.available_adults_slots }}</p>
               <p>Available child slots: {{ time_slot.available_child_slots }}</p>
+              <p>Per Adult: Nu.150</p>
+              <p>Per Child: Nu.50</p>
               <br>
               <form id="survey-form" method="post">
 				{% csrf_token %}

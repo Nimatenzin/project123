@@ -135,6 +135,8 @@ class Payment(models.Model):
         phone_number = models.CharField(max_length=20)
         screenshot = models.ImageField(upload_to='screenshots/')
         created_at = models.DateTimeField(auto_now_add=True)
+        num_adults = models.PositiveIntegerField()
+        num_children = models.PositiveIntegerField()
 
 from django.db import models
 from django.conf import settings
