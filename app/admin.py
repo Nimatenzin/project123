@@ -10,6 +10,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
     icon = 'fas fa-user'
+    search_fields = ('email', 'phone_number')
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.unregister(Group)
@@ -75,3 +76,6 @@ admin.site.register(Contact, ContactAdmin)
 for model, model_admin in admin.site._registry.items():
     if model not in [Schedule, Image]:
         model_admin.has_add_permission = lambda request: False
+
+admin.site.site_header = "AquaBlue"
+admin.site.site_title = "AquaBlue"
