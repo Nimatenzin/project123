@@ -123,29 +123,25 @@ class Schedule(models.Model):
             return True
         else:
             return False
-            
+        
 from django.db import models
 from django.conf import settings
 
 
 class Payment(models.Model):
-        user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-        account_number = models.PositiveIntegerField()
-        email = models.EmailField()
-        phone_number = models.CharField(max_length=20)
-        screenshot = models.ImageField(upload_to='screenshots/')
-        created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_number = models.PositiveIntegerField()
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=20)
+    screenshot = models.ImageField(upload_to='screenshots/')
+    created_at = models.DateTimeField(auto_now_add=True)
 
-from django.db import models
-from django.conf import settings
-from .models import Payment
-from django.utils import timezone
 
 class PaymentApproval(models.Model):
     payment = models.OneToOneField(Payment, on_delete=models.CASCADE)
     approved = models.BooleanField(default=False)
     cancelled = models.BooleanField(default=False)
-   
+
     def approve(self, user):
         self.approved = True
         self.save()
