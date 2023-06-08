@@ -123,7 +123,6 @@ class Schedule(models.Model):
             return True
         else:
             return False
-        
 from django.db import models
 from django.conf import settings
 
@@ -152,6 +151,7 @@ class PaymentApproval(models.Model):
 
     def __str__(self):
         return f'{self.payment.id} - Approval Status: {"Approved" if self.approved else "Cancelled" if self.cancelled else "Pending"}'
+
 
 from django.db import models
 

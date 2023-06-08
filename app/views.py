@@ -57,7 +57,7 @@ def registerUser(request):
             mail_subject = 'Please activate your account'
             email_template = 'account_verification_email.html'
             send_verification_email(request, user, mail_subject, email_template)
-            messages.success(request, 'Account registered successfully.Please check your mail to activate your account!')
+            messages.success(request, 'Account registered successfully.Please check your email to activate your account!')
             return redirect('/registerUser/')
         else:
             print('invalid form')
@@ -177,10 +177,10 @@ def reset_password(request):
             user.set_password(password)
             user.is_active = True
             user.save()
-            messages.success(request, 'Password reset successful')
+            messages.success(request, 'Password reset successfully')
             return redirect('login')
         else:
-            messages.error(request, 'Password do not match!')
+            messages.error(request, 'Password did not match!')
             return redirect('reset_password')
     return render(request, 'reset_password.html')
 
@@ -211,7 +211,6 @@ def book_time_slot(request, time_slot_id):
             num_adults = int(num_adults_str)
             num_children = int(num_children_str)
             if time_slot.schedule.book_time_slot(time_slot, num_adults, num_children):
-                messages.success(request, 'Time slot booked successfully!')
                 # Redirect to payment page
                 return redirect(reverse('payment') + f'?time_slot_id={time_slot_id}')
             else:
