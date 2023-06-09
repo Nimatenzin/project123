@@ -130,6 +130,13 @@ admin.site.register(Image, ImageAdmin)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'occupation', 'created_at')
 
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['show_save'] = False
+        extra_context['has_change_permission'] = False
+        extra_context['show_history'] = False
+        return super().change_view(request, object_id, form_url, extra_context=extra_context)
+
 admin.site.register(Contact, ContactAdmin)
 
 # Remove the add button from all classes except Schedule
