@@ -30,17 +30,26 @@ admin.site.register(TimeSlot, TimeSlotAdmin)
 
 class PaymentApprovalInline(admin.TabularInline):
     model = PaymentApproval
+    
+from django.contrib import admin
+from .models import Payment, PaymentApproval
 
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'account_number', 'email', 'phone_number', 'screenshot', 'created_at')
-    inlines = [PaymentApprovalInline]
+    list_display = (
+        'id', 'user', 'account_number', 'email', 'phone_number',
+        'screenshot', 'created_at', 'num_adults', 'num_children', 'total_amount'
+    )
     search_fields = ('email', 'phone_number')
-
 
 admin.site.register(Payment, PaymentAdmin)
 
+
 class PaymentApprovalAdmin(admin.ModelAdmin):
-    list_display = ('id', 'payment_account_number', 'payment_email', 'payment_phone_number', 'payment_screenshot', 'payment_created_at', 'approval_status',)
+    list_display = (
+        'id', 'payment_account_number', 'payment_email', 'payment_phone_number',
+        'payment_screenshot', 'payment_created_at', 'get_num_adults',
+        'get_num_children', 'get_total_amount', 'approval_status',
+    )
 
     def payment_account_number(self, obj):
         return obj.payment.account_number
@@ -56,6 +65,15 @@ class PaymentApprovalAdmin(admin.ModelAdmin):
 
     def payment_created_at(self, obj):
         return obj.payment.created_at
+
+    def get_num_adults(self, obj):
+        return obj.payment.num_adults
+
+    def get_num_children(self, obj):
+        return obj.payment.num_children
+
+    def get_total_amount(self, obj):
+        return obj.payment.total_amount
 
     def approval_status(self, obj):
         return 'Approved' if obj.approved else 'Cancelled' if obj.cancelled else 'Pending'

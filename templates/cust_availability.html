@@ -205,34 +205,40 @@
                                     <th class="text-center">Phone Number</th>
                                     <th class="text-center">Screenshot</th>
                                     <th class="text-center">Booked Date</th>
+                                    <th class="text-center">Number of Adults</th>
+                                    <th class="text-center">Number of Children</th>
+                                    <th class="text-center">Total Amount</th>
                                     <th class="text-center">Approval Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   {% for payment in payments %}
-                                    {% if payment.user == request.user %}
-                                      <tr>
-                                        <td class="text-center">{{ payment.id }}</td>
-                                        <td class="text-center">{{ payment.account_number }}</td>
-                                        <td class="text-center">{{ payment.email }}</td>
-                                        <td class="text-center">{{ payment.phone_number }}</td>
-                                        <td class="text-center"><img src="{{ payment.screenshot.url }}" width="100"></td>
-                                        <td class="text-center">{{ payment.created_at }}</td>
-                                        <td class="text-center">
-                                          {% if payment.paymentapproval.approved %}
-                                            <span class="badge badge-success">Approved</span><br> {{ payment.paymentapproval.approved_at }}
-                                          {% elif payment.paymentapproval.cancelled %}
-                                            <span class="badge badge-danger">Cancelled</span><br>{{ payment.paymentapproval.cancelled_at }}
-                                          {% else %}
-                                            <span class="badge badge-warning">Pending</span>
-                                          {% endif %}
-                                        </td>
-                                      </tr>
-                                    {% endif %}
+                                  {% if payment.user == request.user %}
+                                  <tr>
+                                    <td class="text-center">{{ payment.id }}</td>
+                                    <td class="text-center">{{ payment.account_number }}</td>
+                                    <td class="text-center">{{ payment.email }}</td>
+                                    <td class="text-center">{{ payment.phone_number }}</td>
+                                    <td class="text-center"><img src="{{ payment.screenshot.url }}" width="100"></td>
+                                    <td class="text-center">{{payment.created_at }}</td>
+                                    <td class="text-center">{{ payment.num_adults}}</td>
+                                    <td class="text-center">{{ payment.num_children }}</td>
+                                    <td class="text-center">{{ payment.total_amount }}</td>
+                                    <td class="text-center">
+                                      {% if payment.paymentapproval.approved %}
+                                      <span class="badge badge-success">Approved</span><br> {{ payment.paymentapproval.approved_at }}
+                                      {% elif payment.paymentapproval.cancelled %}
+                                      <span class="badge badge-danger">Cancelled</span><br>{{ payment.paymentapproval.cancelled_at }}
+                                      {% else %}
+                                      <span class="badge badge-warning">Pending</span>
+                                      {% endif %}
+                                    </td>
+                                  </tr>
+                                  {% endif %}
                                   {% empty %}
-                                    <tr>
-                                      <td colspan="9" class="text-center"><p>No payments to approve.</p></td>
-                                    </tr>
+                                  <tr>
+                                    <td colspan="10" class="text-center"><p>No booking history and status to show</p></td>
+                                  </tr>
                                   {% endfor %}
                                 </tbody>
                               </table>
@@ -240,6 +246,7 @@
                           </div>
                         </div>
                       </div>
+                                           
                     </div>
                   </div>
                 </div>

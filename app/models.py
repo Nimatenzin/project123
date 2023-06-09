@@ -112,17 +112,7 @@ class Schedule(models.Model):
 
     def get_available_time_slots(self):
         return self.timeslot_set.filter(available_adults_slots__gt=0, available_child_slots__gt=0)
-
-    def book_time_slot(self, time_slot, num_adults, num_children):
-        if num_adults <= time_slot.available_adults_slots and num_children <= time_slot.available_child_slots:
-            time_slot.available_adults_slots -= num_adults
-            time_slot.available_child_slots -= num_children
-            time_slot.booked_adults_slots += num_adults
-            time_slot.booked_child_slots += num_children
-            time_slot.save()
-            return True
-        else:
-            return False
+    
 from django.db import models
 from django.conf import settings
 
@@ -134,6 +124,25 @@ class Payment(models.Model):
     phone_number = models.CharField(max_length=20)
     screenshot = models.ImageField(upload_to='screenshots/')
     created_at = models.DateTimeField(auto_now_add=True)
+    num_adults = models.PositiveIntegerField(null=True)
+    num_children = models.PositiveIntegerField(null=True)
+    total_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True)
+
+
+
+    def book_time_slot(self, time_slot):
+        if (
+            self.num_adults <= time_slot.available_adults_slots and
+            self.num_children <= time_slot.available_child_slots
+        ):
+            time_slot.available_adults_slots -= self.num_adults
+            time_slot.available_child_slots -= self.num_children
+            time_slot.booked_adults_slots += self.num_adults
+            time_slot.booked_child_slots += self.num_children
+            time_slot.save()
+            return True
+        else:
+            return False
 
 
 class PaymentApproval(models.Model):

@@ -112,7 +112,7 @@ import dj_database_url
 
 DATABASES = {
 
-    'default': dj_database_url.parse('postgres://productiondatabase_0pce_user:0iAURrKnxO26srV2cwlkky7SFTsbGRc6@dpg-ci0vgom4dad5j74dpsk0-a.singapore-postgres.render.com/productiondatabase_0pce')
+    'default': dj_database_url.parse('postgres://aquablue_user:3opSkn689XaKYmGs95muc5YN5LvvBXpD@dpg-ci1avdhmbg50ci1r7hag-a.singapore-postgres.render.com/aquablue')
 
 }
 

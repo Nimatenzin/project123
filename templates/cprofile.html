@@ -107,38 +107,34 @@
         <nav id="navbar" class="navbar order-last order-lg-0">
           <ul>
             <li>
-              <a class="nav-link scrollto active" href="/"
-                >Home</a
-              >
+              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="/">Home</a>
             </li>
             <li>
-              <a class="nav-link scrollto" href="/about/"
-                >About us</a
-              >
+              <a class="nav-link{% if request.path == '/about/' %} active{% endif %}" href="/about/">About us</a>
             </li>
             <li><a class="nav-link scrollto" href="/#gallery">Gallery</a></li>
             <li>
               <a class="nav-link scrollto" href="/#book-a-table">Reservation</a>
             </li>
             <li>
-              <a class="nav-link scrollto" href="/#contact">Contact Us</a>
+              <a class="nav-link{% if request.path == '/contact/' %} active{% endif %}" href="/contact/">Contact us</a>
             </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="/myAccount/" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ user.username }}
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="accountDropdown">
-                    <li><a class="dropdown-item" href="{% url 'cprofile' %}">My Profile</a></li>
-                    <li><a class="dropdown-item" href="/custDashboard/">Dashboard</a></li>
-                    <li><a class="dropdown-item" href="/logout/" class="text-danger">Logout</a></li>
-                </ul>
-            </li>
-        {% else %}
-            <li><a href="/login/" class="nav-link scrollto">Sign In</a></li>
-            <li><a href="/registerUser/" class="nav-link scrollto">Sign Up</a></li>
-        {% endif %}
-        
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="/myAccount/" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="accountDropdown">
+                  <li><a class="dropdown-item" href="{% url 'cprofile' %}">My Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'custDashboard' %}">Dashboard</a></li>
+                  <li><a class="dropdown-item" href="/logout/" class="text-danger">Logout</a></li>
+              </ul>
+          </li>
+      {% else %}
+          <li><a href="/login/" class="nav-link scrollto">Sign In</a></li>
+          <li><a href="/registerUser/" class="nav-link scrollto">Sign Up</a></li>
+      {% endif %}
+      
           </ul>
           <i class="bi bi-list mobile-nav-toggle"></i>
         </nav>

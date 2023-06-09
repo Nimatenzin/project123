@@ -194,31 +194,6 @@ def check_availability(request):
     return render(request, 'check_availability.html')
 
 
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
-from .models import TimeSlot, Schedule
-from django.urls import reverse
-
-@login_required
-def book_time_slot(request, time_slot_id):
-    time_slot = get_object_or_404(TimeSlot, id=time_slot_id)
-    if request.method == 'POST':
-        num_adults_str = request.POST.get('num_adults')
-        num_children_str = request.POST.get('num_children')
-        if num_adults_str and num_children_str:
-            num_adults = int(num_adults_str)
-            num_children = int(num_children_str)
-            if time_slot.schedule.book_time_slot(time_slot, num_adults, num_children):
-                # Redirect to payment page
-                return redirect(reverse('payment') + f'?time_slot_id={time_slot_id}')
-            else:
-                messages.error(request, 'Selected time slot is not available for the selected number of adults and children.')
-        else:
-            messages.error(request, 'Please provide the number of adults and children.')
-    return render(request, 'book_time_slot.html', {'time_slot': time_slot})
-
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -238,28 +213,50 @@ def show_available_time_slots(request):
             return redirect('/#book-a-table')
     else:
         return redirect('login')
-
+    
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .forms import PaymentForm
+from .models import Payment, TimeSlot
 
 @login_required
-def payment(request):
+def payment(request, time_slot_id):
+    print("Reached payment view")  # Add this line to check if the view is accessed
+
+    time_slot = TimeSlot.objects.get(pk=time_slot_id)
+
     if request.method == 'POST':
+        print("Inside POST condition")  # Add this line to check if the request is a POST request
+
         form = PaymentForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Form is valid")  # Add this line to check if the form is valid
+
             payment = form.save(commit=False)
             payment.user = request.user
             payment.save()
-            messages.success(request, 'Payment submitted successfully.')
+
+            # Update the time slot availability
+            if (
+                payment.num_adults <= time_slot.available_adults_slots and
+                payment.num_children <= time_slot.available_child_slots
+            ):
+                time_slot.available_adults_slots -= payment.num_adults
+                time_slot.available_child_slots -= payment.num_children
+                time_slot.booked_adults_slots += payment.num_adults
+                time_slot.booked_child_slots += payment.num_children
+                time_slot.save()
+
+            messages.success(request, 'Payment successful!')
             return redirect('index')
-        else:
-            messages.error(request, 'Payment submission failed. Please check the form and try again.')
+
     else:
-        form = PaymentForm(initial={'email': request.user.email, 'phone_number': request.user.phone_number})
-    
-    return render(request, 'payment.html', {'form': form})
+        print("Inside GET condition")  # Add this line to check if the request is a GET request
+
+        form = PaymentForm()
+
+    return render(request, 'payment.html', {'form': form, 'time_slot_id': time_slot_id, 'time_slot': time_slot})
 
 
 from django.shortcuts import render

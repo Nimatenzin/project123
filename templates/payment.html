@@ -171,33 +171,52 @@
               PAYMENT
             </h1>
             <br /><br />
-            <form method="post" action="{% url 'payment' %}" enctype="multipart/form-data">
+            <form method="post" action="{% url 'payment' time_slot_id=time_slot_id %}" enctype="multipart/form-data">
               {% csrf_token %}
+              
               <div class="form-group">
-                <label for="account_number">ACCOUNT NUMBER</label>
-                <input type="number" id="account_number" name="account_number" min="0" oninput="validity.valid||(value='')" required />
+                  <label for="account_number">ACCOUNT NUMBER</label>
+                  <input type="number" id="account_number" name="account_number" min="0" oninput="validity.valid||(value='')" required />
               </div>
+              
               <div class="form-group">
-                <label for="email">EMAIL</label>
-                <input type="email" id="email" name="email" value="{{ request.user.email }}" required readonly />
+                  <label for="email">EMAIL</label>
+                  <input type="email" id="email" name="email" value="{{ request.user.email }}" required readonly />
               </div>
+              
               <div class="form-group">
-                <label for="phone_number">PHONE NUMBER</label>
-                <input type="tel" id="phone_number" name="phone_number" value="{{ request.user.phone_number }}" required readonly />
+                  <label for="phone_number">PHONE NUMBER</label>
+                  <input type="tel" id="phone_number" name="phone_number" value="{{ request.user.phone_number }}" required readonly />
               </div>
+              
               <div class="form-group">
-                <label for="screenshot">SCREENSHOT</label>
-                <input type="file" id="screenshot" name="screenshot" required />
+                  <label for="screenshot">SCREENSHOT</label>
+                  <input type="file" id="screenshot" name="screenshot" required />
               </div>
+              
+              <div class="form-group">
+                <label for="num_adults">NUMBER OF ADULTS</label>
+                {{ form.num_adults }}
+            </div>
+        
+            <div class="form-group">
+                <label for="num_children">NUMBER OF CHILDREN</label>
+                {{ form.num_children }}
+            </div>
+        
+            <div class="form-group">
+                <label for="total_amount">TOTAL AMOUNT</label>
+                <input type="text" id="total_amount" name="total_amount" readonly />
+            </div>
+        
               <br />
+              
               <div class="form-group">
-                <button type="submit" class="pay">PAY NOW</button>
-
-                <br><br>
-               
+                  <button type="submit" class="pay">PAY NOW</button>
+                  <br><br>
               </div>
-             
-            </form>    
+          </form>
+          
             <div>
             </div>
             
@@ -251,5 +270,20 @@
       }
     </script>
     <script src="{% static 'assets/js/main.js' %}"></script>
+    <script>
+      function calculateTotalAmount() {
+          var numAdults = parseInt(document.getElementById('id_num_adults').value) || 0;
+          var numChildren = parseInt(document.getElementById('id_num_children').value) || 0;
+          var totalAmount = (numAdults * 150) + (numChildren * 50);
+          document.getElementById('total_amount').value = totalAmount;
+      }
+  
+      // Add event listeners to the input fields
+      document.getElementById('id_num_adults').addEventListener('input', calculateTotalAmount);
+      document.getElementById('id_num_children').addEventListener('input', calculateTotalAmount);
+  
+      // Calculate the initial total amount
+      calculateTotalAmount();
+  </script>
   </body>
 </html>

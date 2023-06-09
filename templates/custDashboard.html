@@ -3,15 +3,7 @@
 
 <div class="container-fluid p-4" style="background: url('/static/assets/img/wang.jpg') top center; background-size: cover; position: relative; padding: 0; min-height: 100vh;">
 <div class="container" style="margin-top:150px;">
-  <div class="row justify-content-center"> <!-- Center the row -->
-    <!-- {% if messages %}
-    <ul class="messages text-center" id="messages-container">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|safe }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %} -->
-
+  <div class="row justify-content-center">
     <div class="col-12">
       <h1 class="text-center mb-5">
         User-Dashboard : Hello, {{ user.username }}!
@@ -27,10 +19,7 @@
             src="https://img.freepik.com/premium-vector/male-character-holding-huge-magnifying-glass-concept-information-research-frequently-asked-questions-query_87771-24149.jpg?w=740"
             alt="Booking History"
           />
-          <h5 class="card-title text-dark">View Booking Details</h5>
-          <p class="card-text text-dark">
-            View your booking history and status
-          </p>
+          <h5 class="card-title text-dark text-center">View Booking Details</h5><br>
           <button type="submit" class="btn btn-primary"><a href="{% url 'cust_availability' %}"  style="color:white;"
             >VIEW DETAILS </a
           > </button>
@@ -46,32 +35,16 @@
             src="https://img.freepik.com/free-vector/online-calendar-concept-illustration_114360-5111.jpg?w=740&t=st=1681856398~exp=1681856998~hmac=bb5901f4416fcb70f93d71a3e6f56f622744967bcb6d75fdc1bb45124e07b8c8"
             alt="Make Reservation"
           />
-          <h5 class="card-title text-dark">Make Reservation</h5>
-          <p class="card-text text-dark">Book a new slot</p>
-          {% comment %} <a href="/#book-a-table" class="btn btn-primary" style="background-color: #3b71ca"
-            >Book Now</a
-          > {% endcomment %}
+          <h5 class="card-title text-dark text-center">Make Reservation</h5><br>
           <button type="submit" class="btn btn-primary"><a href="/#book-a-table"  style="color:white;"
             >BOOK NOW </a
           > </button>
         </div>
       </div>
     </div>
-    <!-- <div class="col-12 text-center">
-      <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
-    </div> -->
   </div>
 </div>
 </div>
-<!-- <script>
-  // Get the messages container element
-  const messagesContainer = document.querySelector('#messages-container');
-
-  // Hide messages after 5 seconds
-  setTimeout(() => {
-    messagesContainer.style.display = 'none';
-  }, 5000);
-</script> -->
 {% endblock %}
 
 

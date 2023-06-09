@@ -175,7 +175,7 @@
                   <td>{{ time_slot.booked_adults_slots }}</td>
                   <td>{{ time_slot.booked_child_slots }}</td>
                   <td>
-                    <form method="post" action="{% url 'book_time_slot' time_slot.id %}">
+                    <form method="post" action="{% url 'payment' time_slot.id %}">
                       {% csrf_token %}
                       <button type="submit">Book</button>
                     </form>
