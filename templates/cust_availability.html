@@ -220,7 +220,7 @@
                                     <td class="text-center">{{ payment.email }}</td>
                                     <td class="text-center">{{ payment.phone_number }}</td>
                                     <td class="text-center"><img src="{{ payment.screenshot.url }}" width="100"></td>
-                                    <td class="text-center">{{payment.created_at }}</td>
+                                    <td class="text-center">{{payment.created_at.date}}</td>
                                     <td class="text-center">{{ payment.num_adults}}</td>
                                     <td class="text-center">{{ payment.num_children }}</td>
                                     <td class="text-center">{{ payment.total_amount }}</td>

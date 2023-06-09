@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import User, UserProfile, Schedule, TimeSlot, Payment, PaymentApproval, Image, Contact
 from django.contrib.auth.admin import UserAdmin, Group
+from django.contrib import messages
+from django.core.exceptions import ValidationError
+
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
@@ -23,33 +26,68 @@ class ScheduleAdmin(admin.ModelAdmin):
     list_display = ['date']
 
 class TimeSlotAdmin(admin.ModelAdmin):
-    list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots',]
+    list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots']
 
 admin.site.register(Schedule, ScheduleAdmin)
 admin.site.register(TimeSlot, TimeSlotAdmin)
 
 class PaymentApprovalInline(admin.TabularInline):
     model = PaymentApproval
-    
-from django.contrib import admin
-from .models import Payment, PaymentApproval
 
 class PaymentAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'user', 'account_number', 'email', 'phone_number',
-        'screenshot', 'created_at', 'num_adults', 'num_children', 'total_amount'
+        'screenshot', 'display_created_date', 'num_adults', 'num_children', 'total_amount'
     )
+    inlines = [PaymentApprovalInline]
     search_fields = ('email', 'phone_number')
+    
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
+    def display_created_date(self, obj):
+        return obj.created_at.date()
+
+    display_created_date.short_description = 'Created Date'
+
+    def get_fieldsets(self, request, obj=None):
+        if obj is None:
+            return super().get_fieldsets(request, obj)
+        else:
+            # Remove the "General" tab for existing objects
+            return []
+        
+    def get_changeform_initial_data(self, request):
+        initial = super().get_changeform_initial_data(request)
+        initial['role'] = ''
+        return initial
+
+    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['show_delete'] = False
+        extra_context['show_save_and_add_another'] = False
+        extra_context['show_save_and_continue'] = False
+        return super().changeform_view(request, object_id, form_url, extra_context=extra_context)
 
 admin.site.register(Payment, PaymentAdmin)
-
 
 class PaymentApprovalAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'payment_account_number', 'payment_email', 'payment_phone_number',
-        'payment_screenshot', 'payment_created_at', 'get_num_adults',
+        'payment_screenshot', 'display_created_date', 'get_num_adults',
         'get_num_children', 'get_total_amount', 'approval_status',
     )
+
+    def save_model(self, request, obj, form, change):
+        if obj.approved and obj.cancelled:
+            # If both checkboxes are selected, raise a validation error
+            raise ValidationError("Cannot select both 'Approved' and 'Cancelled'")
+
+        super().save_model(request, obj, form, change)
+
+        if '_continue' not in request.POST and '_addanother' not in request.POST:
+            # Customize the success message
+            messages.success(request, 'Message saved successfully')
 
     def payment_account_number(self, obj):
         return obj.payment.account_number
@@ -63,8 +101,10 @@ class PaymentApprovalAdmin(admin.ModelAdmin):
     def payment_screenshot(self, obj):
         return obj.payment.screenshot
 
-    def payment_created_at(self, obj):
-        return obj.payment.created_at
+    def display_created_date(self, obj):
+        return obj.payment.created_at.date()
+
+    display_created_date.short_description = 'Payment Created Date'
 
     def get_num_adults(self, obj):
         return obj.payment.num_adults
@@ -77,7 +117,9 @@ class PaymentApprovalAdmin(admin.ModelAdmin):
 
     def approval_status(self, obj):
         return 'Approved' if obj.approved else 'Cancelled' if obj.cancelled else 'Pending'
-
+    
+   
+    
 admin.site.register(PaymentApproval, PaymentApprovalAdmin)
 
 class ImageAdmin(admin.ModelAdmin):

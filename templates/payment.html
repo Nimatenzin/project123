@@ -176,7 +176,7 @@
               
               <div class="form-group">
                   <label for="account_number">ACCOUNT NUMBER</label>
-                  <input type="number" id="account_number" name="account_number" min="0" oninput="validity.valid||(value='')" required />
+                  <input  type="number" id="account_number" name="account_number" oninput="validity.valid||(value='')" required style="appearance: none; -webkit-appearance: none; -moz-appearance: textfield; margin: 0;" />
               </div>
               
               <div class="form-group">
@@ -189,10 +189,7 @@
                   <input type="tel" id="phone_number" name="phone_number" value="{{ request.user.phone_number }}" required readonly />
               </div>
               
-              <div class="form-group">
-                  <label for="screenshot">SCREENSHOT</label>
-                  <input type="file" id="screenshot" name="screenshot" required />
-              </div>
+              
               
               <div class="form-group">
                 <label for="num_adults">NUMBER OF ADULTS</label>
@@ -208,6 +205,10 @@
                 <label for="total_amount">TOTAL AMOUNT</label>
                 <input type="text" id="total_amount" name="total_amount" readonly />
             </div>
+            <div class="form-group">
+              <label for="screenshot">SCREENSHOT</label>
+              <input type="file" id="screenshot" name="screenshot" required />
+          </div>
         
               <br />
               
@@ -271,19 +272,19 @@
     </script>
     <script src="{% static 'assets/js/main.js' %}"></script>
     <script>
-      function calculateTotalAmount() {
-          var numAdults = parseInt(document.getElementById('id_num_adults').value) || 0;
-          var numChildren = parseInt(document.getElementById('id_num_children').value) || 0;
-          var totalAmount = (numAdults * 150) + (numChildren * 50);
-          document.getElementById('total_amount').value = totalAmount;
-      }
-  
-      // Add event listeners to the input fields
-      document.getElementById('id_num_adults').addEventListener('input', calculateTotalAmount);
-      document.getElementById('id_num_children').addEventListener('input', calculateTotalAmount);
-  
-      // Calculate the initial total amount
-      calculateTotalAmount();
-  </script>
+    function calculateTotalAmount() {
+        var numAdults = parseInt(document.getElementById('id_num_adults').value) || 0;
+        var numChildren = parseInt(document.getElementById('id_num_children').value) || 0;
+        var totalAmount = (numAdults * 150) + (numChildren * 50);
+        document.getElementById('total_amount').value = totalAmount;
+    }
+
+    // Add event listeners to the input fields
+    document.getElementById('id_num_adults').addEventListener('input', calculateTotalAmount);
+    document.getElementById('id_num_children').addEventListener('input', calculateTotalAmount);
+
+    // Calculate the initial total amount
+    calculateTotalAmount();
+</script>
   </body>
 </html>

@@ -108,11 +108,12 @@ WSGI_APPLICATION = 'aquablue.wsgi.application'
 #     }
 # }
 
+
 import dj_database_url
 
 DATABASES = {
 
-    'default': dj_database_url.parse('postgres://aquablue_user:3opSkn689XaKYmGs95muc5YN5LvvBXpD@dpg-ci1avdhmbg50ci1r7hag-a.singapore-postgres.render.com/aquablue')
+    'default': dj_database_url.parse('postgres://productiondatabase_husr_user:HdQeAXHs2KBX1ay0D59gaIKfLovJvpWV@dpg-ci1f6fvdvk4kgook8qk0-a.singapore-postgres.render.com/productiondatabase_husr')
 
 }
 

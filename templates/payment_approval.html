@@ -22,7 +22,11 @@
             <th>Journal Number</th>
             <th>Screenshot</th>
             <th>Created At</th>
+            <th>Number of Adults</th>
+            <th>Number of Children</th>
+            <th>Total Amount</th>
             <th>Status</th>
+            <th>
           </tr>
         </thead>
         <tbody>
@@ -33,7 +37,10 @@
               <td>{{ payment.journal_number }}</td>
               <td><img src="{{ payment.screenshot.url }}" width="100"></td>
               <td>{{ payment.created_at }}</td>
-              <td>
+              <td>{{ payment.num_adults}}</td>
+              <td>{{ payment.num_children }}</td>
+              <td>{{ payment.total_amount }}</td>
+              
                 {% with approval=payment.paymentapproval %}
                   {% if approval.approved %}
                     Approved by {{ approval.approved_by }} on {{ approval.approved_at }}
@@ -49,7 +56,7 @@
         </tbody>
       </table>
     {% else %}
-      <p style="color:red;">No reservation recorded.</p>
+      <p style:"color:red;">No reservation recorded.</p>
     {% endif %}
     {% endblock %}
     
