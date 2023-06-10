@@ -42,8 +42,6 @@ class PaymentAdmin(admin.ModelAdmin):
     inlines = [PaymentApprovalInline]
     search_fields = ('email', 'phone_number')
     
-    def has_delete_permission(self, request, obj=None):
-        return False
     
     def display_created_date(self, obj):
         return obj.created_at.date()
