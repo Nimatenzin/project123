@@ -36,7 +36,7 @@ class PaymentApprovalInline(admin.TabularInline):
 
 class PaymentAdmin(admin.ModelAdmin):
     list_display = (
-        'id', 'user', 'account_number', 'email', 'phone_number',
+        'id','account_number', 'email', 'phone_number',
         'screenshot', 'display_created_date', 'num_adults', 'num_children', 'total_amount'
     )
     inlines = [PaymentApprovalInline]
