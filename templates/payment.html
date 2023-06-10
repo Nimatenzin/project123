@@ -147,7 +147,9 @@
           <div class="instructions">
             <h2 style="font-weight: bolder; font-size: 21px">SCAN TO PAY</h2></br><br>
             <p>1. Please scan the QR code given below to make payment.</p></br>
-            <p>2. Please take a screenshot. We will ask for it later.</p><br><br>
+            <p>2. Please take a screenshot and upload it.</p><br>
+            <p>Per Adult: Nu.150</p><br>
+            <p>Per Child: Nu.50</p><br>
             <div class="qr-code">
               <img
                 src="{% static 'assets/img/nimahero.jpg' %}"
@@ -155,7 +157,7 @@
               />
             </div><br>
 
-            <p>NAME: AQUABLUE(BoB)</p>
+            <p>NAME: AQUABLUE(Bank of Bhutan)</p>
           </div>
         </div>
         <div class="col-md-8">
@@ -171,6 +173,8 @@
               PAYMENT
             </h1>
             <br /><br />
+            <p  class="text-dark">Available adult slots: {{ time_slot.available_adults_slots }}</p>
+            <p  class="text-dark">Available child slots: {{ time_slot.available_child_slots }}</p>
             <form method="post" action="{% url 'payment' time_slot_id=time_slot_id %}" enctype="multipart/form-data">
               {% csrf_token %}
               
@@ -188,9 +192,7 @@
                   <label for="phone_number">PHONE NUMBER</label>
                   <input type="tel" id="phone_number" name="phone_number" value="{{ request.user.phone_number }}" required readonly />
               </div>
-              
-              
-              
+
               <div class="form-group">
                 <label for="num_adults">NUMBER OF ADULTS</label>
                 {{ form.num_adults }}
