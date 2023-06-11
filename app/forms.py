@@ -44,15 +44,11 @@ class PaymentForm(forms.ModelForm):
     num_adults = forms.IntegerField(min_value=0, required=True)
     num_children = forms.IntegerField(min_value=0, required=True)
     total_amount = forms.DecimalField(min_value=0.0, required=True)
+    
 
     class Meta:
         model = Payment
         fields = ['account_number', 'screenshot', 'email', 'phone_number', 'num_adults', 'num_children', 'total_amount']
-        # widgets = {
-        #     'email': forms.EmailInput(attrs={'readonly': 'readonly'}),
-        #     'phone_number': forms.TextInput(attrs={'readonly': 'readonly'}),
-        # }
-
 
 
 

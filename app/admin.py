@@ -27,6 +27,22 @@ class ScheduleAdmin(admin.ModelAdmin):
 
 class TimeSlotAdmin(admin.ModelAdmin):
     list_display = ['start_time', 'end_time', 'total_adults_slots', 'total_child_slots', 'available_adults_slots', 'available_child_slots', 'booked_adults_slots', 'booked_child_slots']
+    
+    def validate_time_slots(self, request, queryset):
+        for timeslot in queryset:
+            if timeslot.start_time == timeslot.end_time:
+                raise ValidationError("Start time and end time cannot be the same.")
+        
+            overlapping_slots = queryset.exclude(id=timeslot.id).filter(
+                start_time__lt=timeslot.end_time,
+                end_time__gt=timeslot.start_time
+            )
+            if overlapping_slots.exists():
+                raise ValidationError("Time slot overlaps with an existing slot.")
+
+    validate_time_slots.short_description = "Validate Time Slots"
+
+    actions = [validate_time_slots]
 
 admin.site.register(Schedule, ScheduleAdmin)
 admin.site.register(TimeSlot, TimeSlotAdmin)
@@ -69,24 +85,17 @@ class PaymentAdmin(admin.ModelAdmin):
 
 admin.site.register(Payment, PaymentAdmin)
 
+from django.contrib import admin
+from .models import PaymentApproval
+from .forms import PaymentForm
+
 class PaymentApprovalAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'payment_account_number', 'payment_email', 'payment_phone_number',
         'payment_screenshot', 'display_created_date', 'get_num_adults',
         'get_num_children', 'get_total_amount', 'approval_status',
     )
-
-    def save_model(self, request, obj, form, change):
-        if obj.approved and obj.cancelled:
-            # If both checkboxes are selected, raise a validation error
-            raise ValidationError("Cannot select both 'Approved' and 'Cancelled'")
-
-        super().save_model(request, obj, form, change)
-
-        if '_continue' not in request.POST and '_addanother' not in request.POST:
-            # Customize the success message
-            messages.success(request, 'Message saved successfully')
-
+    
     def payment_account_number(self, obj):
         return obj.payment.account_number
 
@@ -116,7 +125,6 @@ class PaymentApprovalAdmin(admin.ModelAdmin):
     def approval_status(self, obj):
         return 'Approved' if obj.approved else 'Cancelled' if obj.cancelled else 'Pending'
     
-   
     
 admin.site.register(PaymentApproval, PaymentApprovalAdmin)
 
