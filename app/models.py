@@ -97,8 +97,8 @@ class UserProfile(models.Model):
 from django.db import models
 
 class TimeSlot(models.Model):
-    start_time = models.DateTimeField()
-    end_time = models.DateTimeField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     total_adults_slots = models.PositiveIntegerField()
     total_child_slots = models.PositiveIntegerField()
     available_adults_slots = models.PositiveIntegerField()
@@ -108,7 +108,7 @@ class TimeSlot(models.Model):
     schedule = models.ForeignKey('Schedule', on_delete=models.CASCADE)
 
 class Schedule(models.Model):
-    date = models.DateField()
+    date = models.DateField(unique=True)
 
     def get_available_time_slots(self):
         return self.timeslot_set.filter(available_adults_slots__gt=0, available_child_slots__gt=0)

@@ -288,5 +288,37 @@
     // Calculate the initial total amount
     calculateTotalAmount();
 </script>
+
+<script>
+  function calculateTotalAmount() {
+    var numAdults = parseInt(document.getElementById('id_num_adults').value) || 0;
+    var numChildren = parseInt(document.getElementById('id_num_children').value) || 0;
+    var availableAdults = {{ time_slot.available_adults_slots }};
+    var availableChildren = {{ time_slot.available_child_slots }};
+    
+    // Check if the entered values exceed the available slots
+    if (numAdults > availableAdults) {
+      numAdults = availableAdults;
+      document.getElementById('id_num_adults').value = numAdults;
+    }
+    
+    if (numChildren > availableChildren) {
+      numChildren = availableChildren;
+      document.getElementById('id_num_children').value = numChildren;
+    }
+    
+    // Calculate the total amount based on the updated values
+    var totalAmount = (numAdults * 150) + (numChildren * 50);
+    document.getElementById('total_amount').value = totalAmount;
+  }
+
+  // Add event listeners to the input fields
+  document.getElementById('id_num_adults').addEventListener('input', calculateTotalAmount);
+  document.getElementById('id_num_children').addEventListener('input', calculateTotalAmount);
+
+  // Calculate the initial total amount
+  calculateTotalAmount();
+</script>
+
   </body>
 </html>
