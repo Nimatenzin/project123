@@ -27,17 +27,19 @@
 				</div>
 				<div class="form-wrapper">
 					<label for="phone_number" style="color: black;">Phone Number</label>
-					<input type="tel" id="phone_number" name="phone_number"  placeholder= "xxxxxxxx" class="form-control" pattern="([1]{1}[7]{1}[0-9]{6}|[7]{1}[7]{1}[0-9]{6})" maxlength="8" required>
+					<input type="tel" id="phone_number" name="phone_number" placeholder="xxxxxxxx" class="form-control" pattern="(17|77)[0-9]{6}" maxlength="8" required>
 					<i class="zmdi zmdi-phone"></i>
 				</div>
+				
 				<div class="form-wrapper">
 					<label for="password" style="color: black;">Password</label>
-					<input type="password" id="password" name="password" class="form-control" required>
+					<input type="password" id="password" name="password" class="form-control"  maxlength="8" title="Must contain at least one number, one uppercase letter, one lowercase letter, one special character, and be at least 8 characters long" required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
+				
 				<div class="form-wrapper">
 					<label for="confirm_password" style="color: black;">Confirm Password</label>
-					<input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+					<input type="password" id="confirm_password" name="confirm_password" class="form-control"  maxlength="8"  required>
 					<i class="zmdi zmdi-lock"></i>
 				</div>
 				<ul class="errorlist">
@@ -70,5 +72,32 @@
 </div>
   </div>
   {% endblock %}
+
+  <script>
+	var passwordInput = document.getElementById("password");
+	var requirementsMessage = document.getElementById("password-requirements");
+  
+	passwordInput.addEventListener("input", function() {
+	  var password = passwordInput.value;
+  
+	  var hasLength = password.length >= 8;
+	  var hasSpecialCharacter = /[!@#$%^&*]/.test(password);
+  
+	  var requirements = [];
+	  if (!hasLength) {
+		requirements.push("At least 8 characters long");
+	  }
+	  if (!hasSpecialCharacter) {
+		requirements.push("At least one special character (!@#$%^&*)");
+	  }
+  
+	  if (requirements.length === 0) {
+		requirementsMessage.innerHTML = "";
+	  } else {
+		requirementsMessage.innerHTML = "Password requirements: " + requirements.join(", ");
+	  }
+	});
+  </script>
+  
   
   
